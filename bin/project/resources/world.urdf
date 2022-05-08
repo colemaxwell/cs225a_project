@@ -1,10 +1,918 @@
 <?xml version="1.0" ?>
 
-<world name="demo_world" gravity="0.0 0.0 -9.81">
+<world name="project_world" gravity="0.0 0.0 -9.81">
 
 	<robot name="PANDA">
-		<model dir="./resources" path="panda_arm.urdf" name="panda_arm" />
+		<model dir="./resources" path="panda_arm_hand.urdf" name="panda_arm_hand" />
 	</robot>
+
+	<static_object name="Board">
+		<origin xyz="0.5 0.0 0.0" rpy="0 0 1.5708" />
+		<inertial>
+        	<origin xyz="0 0 0" rpy="0 0 0" />
+        	<mass value="0" />
+        	<inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+      	</inertial>
+
+	    <visual>
+	        <origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+	            <mesh filename="../../model/chess/meshes/visual/Board.obj" scale="1 1 1"/>
+	        </geometry>
+	        <material name="Black_Square">
+        		<color rgba="1 0 0 1"/>
+  			</material>
+	    </visual>
+
+	    <!--<visual>
+	        <origin xyz="0 0 -0.01" rpy="0 0 0" />
+	        <geometry>
+	            <box size="0.54 0.54 0.02" />
+	        </geometry>
+	        <material name="material">
+		        <color rgba="1 1 1 1.0" />
+	        </material>
+	    </visual> -->
+
+	    <collision>
+	        <origin xyz="0 0 -0.01" rpy="0 0 0" />
+	        <geometry>
+	            <box size="0.54 0.54 0.02" />
+	            <!--<box size="0.48 0.48 0.02" />-->
+	        </geometry>
+	    </collision>
+	</static_object>
+	
+	
+	
+	<dynamic_object name="WRook1">
+        <origin xyz="0.71 -0.21 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WRook.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.0375" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.075" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WKnight1">
+        <origin xyz="0.71 -0.15 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WKnight.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.045" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.09" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WBishop1">
+        <origin xyz="0.71 -0.09 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WBishop.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.05" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.1" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WQueen">
+        <origin xyz="0.71 -0.03 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WQueen.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.06" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.12" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WKing">
+        <origin xyz="0.71 0.03 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WKing.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.065" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.13" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WBishop2">
+        <origin xyz="0.71 0.09 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WBishop.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.05" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.1" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WKnight2">
+        <origin xyz="0.71 0.15 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WKnight.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.045" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.09" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WRook2">
+        <origin xyz="0.71 0.21 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WRook.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.0375" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.075" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WPawn1">
+        <origin xyz="0.6499999999999999 -0.21 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WPawn2">
+        <origin xyz="0.6499999999999999 -0.15 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WPawn3">
+        <origin xyz="0.6499999999999999 -0.09 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WPawn4">
+        <origin xyz="0.6499999999999999 -0.03 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WPawn5">
+        <origin xyz="0.6499999999999999 0.03 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WPawn6">
+        <origin xyz="0.6499999999999999 0.09 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WPawn7">
+        <origin xyz="0.6499999999999999 0.15 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="WPawn8">
+        <origin xyz="0.6499999999999999 0.21 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/WPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BPawn1">
+        <origin xyz="0.35 -0.21 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BPawn2">
+        <origin xyz="0.35 -0.15 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BPawn3">
+        <origin xyz="0.35 -0.09 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BPawn4">
+        <origin xyz="0.35 -0.03 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BPawn5">
+        <origin xyz="0.35 0.03 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BPawn6">
+        <origin xyz="0.35 0.09 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BPawn7">
+        <origin xyz="0.35 0.15 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BPawn8">
+        <origin xyz="0.35 0.21 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BPawn.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.03" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.06" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BRook1">
+        <origin xyz="0.29 -0.21 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BRook.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.0375" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.075" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BKnight1">
+        <origin xyz="0.29 -0.15 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BKnight.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.045" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.09" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BBishop1">
+        <origin xyz="0.29 -0.09 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BBishop.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.05" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.1" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BQueen">
+        <origin xyz="0.29 -0.03 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BQueen.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.06" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.12" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BKing">
+        <origin xyz="0.29 0.03 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BKing.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.065" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.13" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BBishop2">
+        <origin xyz="0.29 0.09 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BBishop.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.05" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.1" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BKnight2">
+        <origin xyz="0.29 0.15 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BKnight.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.045" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.09" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+<dynamic_object name="BRook2">
+        <origin xyz="0.29 0.21 0" rpy="0 0 0" />
+        <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <mass value="0.050" />
+                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+          </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.00675" rpy="1.5708 0 -1.5708" />
+        <geometry>
+                <mesh filename="../../model/chess/meshes/visual/BRook.obj" scale="0.04 0.04 0.04"/>
+            </geometry>
+            <material name="material">
+                <color rgba="0 0 0 1.0" />
+            </material>
+        </visual>
+
+
+        <collision>
+            <origin xyz="0 0 0.0375" rpy="0 0 0" />
+            <geometry>
+                <box size="0.03 0.03 0.075" />
+            </geometry>
+        </collision>
+    </dynamic_object>
+
+
+
+
+	
 
 	<light name="light1" type="directional">
 		<position xyz="2.0 -2.0 2.0" />
