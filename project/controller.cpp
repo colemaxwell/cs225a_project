@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
 	// prepare controller
 	int dof = robot->dof();
 	const string ee_link_name = "link7";
-	const Vector3d pos_in_ee_link = Vector3d(0, 0, 0.15);
+	const Vector3d pos_in_ee_link = Vector3d(0, 0, 0.20);
 	VectorXd command_torques = VectorXd::Zero(dof);
 
 	// model quantities for operational space control
@@ -161,7 +161,7 @@ int main(int argc, char* argv[]) {
 		robot->angularVelocity(w,ee_link_name, pos_in_ee_link);
 
 		VectorXd q_desired(dof);
-		q_desired <<0,0,0,0,0,0,0,0,0;
+		q_desired <<0,-0.785398,-0,-2.18166,-0,1.39626,0.1,0,0;
 
 
 		// ---------------------------  question 1 ---------------------------------------
@@ -171,9 +171,11 @@ int main(int argc, char* argv[]) {
 		double kpj = 50;
 		double kvj = 14;
 
-		x_d << (0.3 + 0.1*sin(PI * time)) , (0.1 + 0.1*cos(PI * time)) , 0.5;// set x_d
+		double speed = 0.3;
 
-		x_d_dot << (0.1*PI*cos(PI * time)) , (-0.1*PI*sin(PI * time)) , 0;
+		x_d << (0.4 + 0.24*sin(PI * time * speed)) , (0.24*cos(PI * time * speed)) , 0.05;// set x_d
+
+		x_d_dot << (0.24 * speed *PI*cos(PI * time * speed)) , (-0.24 * speed *PI*sin(PI * time * speed)) , 0;
 
 		// calculate joint_task_torque
 

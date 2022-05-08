@@ -7,7 +7,7 @@
 	</robot>
 
 	<static_object name="Board">
-		<origin xyz="0.5 0.0 0.0" rpy="0 0 1.5708" />
+		<origin xyz="0.4 0.0 0.0" rpy="0 0 1.5708" />
 		<inertial>
         	<origin xyz="0 0 0" rpy="0 0 0" />
         	<mass value="0" />
@@ -44,9 +44,8 @@
 	</static_object>
 	
 	
-	
 	<dynamic_object name="WRook1">
-        <origin xyz="0.71 -0.21 0" rpy="0 0 0" />
+        <origin xyz="0.61 -0.21 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -73,7 +72,7 @@
     </dynamic_object>
 
 <dynamic_object name="WKnight1">
-        <origin xyz="0.71 -0.15 0" rpy="0 0 0" />
+        <origin xyz="0.61 -0.15 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -100,7 +99,7 @@
     </dynamic_object>
 
 <dynamic_object name="WBishop1">
-        <origin xyz="0.71 -0.09 0" rpy="0 0 0" />
+        <origin xyz="0.61 -0.09 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -127,7 +126,7 @@
     </dynamic_object>
 
 <dynamic_object name="WQueen">
-        <origin xyz="0.71 -0.03 0" rpy="0 0 0" />
+        <origin xyz="0.61 -0.03 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -154,7 +153,7 @@
     </dynamic_object>
 
 <dynamic_object name="WKing">
-        <origin xyz="0.71 0.03 0" rpy="0 0 0" />
+        <origin xyz="0.61 0.03 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -181,7 +180,7 @@
     </dynamic_object>
 
 <dynamic_object name="WBishop2">
-        <origin xyz="0.71 0.09 0" rpy="0 0 0" />
+        <origin xyz="0.61 0.09 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -208,7 +207,7 @@
     </dynamic_object>
 
 <dynamic_object name="WKnight2">
-        <origin xyz="0.71 0.15 0" rpy="0 0 0" />
+        <origin xyz="0.61 0.15 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -235,7 +234,7 @@
     </dynamic_object>
 
 <dynamic_object name="WRook2">
-        <origin xyz="0.71 0.21 0" rpy="0 0 0" />
+        <origin xyz="0.61 0.21 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -262,7 +261,7 @@
     </dynamic_object>
 
 <dynamic_object name="WPawn1">
-        <origin xyz="0.6499999999999999 -0.21 0" rpy="0 0 0" />
+        <origin xyz="0.55 -0.21 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -289,7 +288,7 @@
     </dynamic_object>
 
 <dynamic_object name="WPawn2">
-        <origin xyz="0.6499999999999999 -0.15 0" rpy="0 0 0" />
+        <origin xyz="0.55 -0.15 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -316,7 +315,7 @@
     </dynamic_object>
 
 <dynamic_object name="WPawn3">
-        <origin xyz="0.6499999999999999 -0.09 0" rpy="0 0 0" />
+        <origin xyz="0.55 -0.09 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -343,7 +342,7 @@
     </dynamic_object>
 
 <dynamic_object name="WPawn4">
-        <origin xyz="0.6499999999999999 -0.03 0" rpy="0 0 0" />
+        <origin xyz="0.55 -0.03 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -370,7 +369,7 @@
     </dynamic_object>
 
 <dynamic_object name="WPawn5">
-        <origin xyz="0.6499999999999999 0.03 0" rpy="0 0 0" />
+        <origin xyz="0.55 0.03 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -397,7 +396,7 @@
     </dynamic_object>
 
 <dynamic_object name="WPawn6">
-        <origin xyz="0.6499999999999999 0.09 0" rpy="0 0 0" />
+        <origin xyz="0.55 0.09 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -424,7 +423,7 @@
     </dynamic_object>
 
 <dynamic_object name="WPawn7">
-        <origin xyz="0.6499999999999999 0.15 0" rpy="0 0 0" />
+        <origin xyz="0.55 0.15 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -451,7 +450,7 @@
     </dynamic_object>
 
 <dynamic_object name="WPawn8">
-        <origin xyz="0.6499999999999999 0.21 0" rpy="0 0 0" />
+        <origin xyz="0.55 0.21 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -478,7 +477,7 @@
     </dynamic_object>
 
 <dynamic_object name="BPawn1">
-        <origin xyz="0.35 -0.21 0" rpy="0 0 0" />
+        <origin xyz="0.25 -0.21 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -505,7 +504,7 @@
     </dynamic_object>
 
 <dynamic_object name="BPawn2">
-        <origin xyz="0.35 -0.15 0" rpy="0 0 0" />
+        <origin xyz="0.25 -0.15 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -532,7 +531,7 @@
     </dynamic_object>
 
 <dynamic_object name="BPawn3">
-        <origin xyz="0.35 -0.09 0" rpy="0 0 0" />
+        <origin xyz="0.25 -0.09 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -559,7 +558,7 @@
     </dynamic_object>
 
 <dynamic_object name="BPawn4">
-        <origin xyz="0.35 -0.03 0" rpy="0 0 0" />
+        <origin xyz="0.25 -0.03 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -586,7 +585,7 @@
     </dynamic_object>
 
 <dynamic_object name="BPawn5">
-        <origin xyz="0.35 0.03 0" rpy="0 0 0" />
+        <origin xyz="0.25 0.03 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -613,7 +612,7 @@
     </dynamic_object>
 
 <dynamic_object name="BPawn6">
-        <origin xyz="0.35 0.09 0" rpy="0 0 0" />
+        <origin xyz="0.25 0.09 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -640,7 +639,7 @@
     </dynamic_object>
 
 <dynamic_object name="BPawn7">
-        <origin xyz="0.35 0.15 0" rpy="0 0 0" />
+        <origin xyz="0.25 0.15 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -667,7 +666,7 @@
     </dynamic_object>
 
 <dynamic_object name="BPawn8">
-        <origin xyz="0.35 0.21 0" rpy="0 0 0" />
+        <origin xyz="0.25 0.21 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -694,7 +693,7 @@
     </dynamic_object>
 
 <dynamic_object name="BRook1">
-        <origin xyz="0.29 -0.21 0" rpy="0 0 0" />
+        <origin xyz="0.19 -0.21 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -721,7 +720,7 @@
     </dynamic_object>
 
 <dynamic_object name="BKnight1">
-        <origin xyz="0.29 -0.15 0" rpy="0 0 0" />
+        <origin xyz="0.19 -0.15 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -748,7 +747,7 @@
     </dynamic_object>
 
 <dynamic_object name="BBishop1">
-        <origin xyz="0.29 -0.09 0" rpy="0 0 0" />
+        <origin xyz="0.19 -0.09 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -775,7 +774,7 @@
     </dynamic_object>
 
 <dynamic_object name="BQueen">
-        <origin xyz="0.29 -0.03 0" rpy="0 0 0" />
+        <origin xyz="0.19 -0.03 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -802,7 +801,7 @@
     </dynamic_object>
 
 <dynamic_object name="BKing">
-        <origin xyz="0.29 0.03 0" rpy="0 0 0" />
+        <origin xyz="0.19 0.03 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -829,7 +828,7 @@
     </dynamic_object>
 
 <dynamic_object name="BBishop2">
-        <origin xyz="0.29 0.09 0" rpy="0 0 0" />
+        <origin xyz="0.19 0.09 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -856,7 +855,7 @@
     </dynamic_object>
 
 <dynamic_object name="BKnight2">
-        <origin xyz="0.29 0.15 0" rpy="0 0 0" />
+        <origin xyz="0.19 0.15 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
@@ -883,7 +882,7 @@
     </dynamic_object>
 
 <dynamic_object name="BRook2">
-        <origin xyz="0.29 0.21 0" rpy="0 0 0" />
+        <origin xyz="0.19 0.21 0" rpy="0 0 0" />
         <inertial>
                 <origin xyz="0 0 0" rpy="0 0 0" />
                 <mass value="0.050" />
