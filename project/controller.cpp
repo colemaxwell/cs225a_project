@@ -173,7 +173,22 @@ int main(int argc, char* argv[]) {
 
 		double speed = 0.3;
 
-		x_d << (0.4 + 0.24*sin(PI * time * speed)) , (0.24*cos(PI * time * speed)) , 0.05;// set x_d
+		//x_d << (0.4 + 0.24*sin(PI * time * speed)) , (0.24*cos(PI * time * speed)) , 0.05;// set x_d
+		
+		// set x_d
+			if (time < 1) {
+				x_d << .7, .2, .7;
+			} else if (time > 1 && time < 2) {
+				x_d << .7, .2, .2;
+			} else if (time > 2 && time < 3) {
+				x_d << .7, .2, .7;
+			} else if (time > 3 && time < 4) {
+				x_d << .5, .5, .7;
+			} else if (time > 4 && time < 5) {
+				x_d << .5, .5, .2;
+			} else {
+				x_d << .5, .5, .7;
+			}
 
 		x_d_dot << (0.24 * speed *PI*cos(PI * time * speed)) , (-0.24 * speed *PI*sin(PI * time * speed)) , 0;
 
