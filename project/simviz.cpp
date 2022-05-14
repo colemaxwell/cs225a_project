@@ -34,7 +34,10 @@ const string CONTROLLER_RUNING_KEY = "sai2::cs225a::controller_running";
 
 
 // dynamic objects information
-const vector<string> object_names = {"Board"};
+const vector<string> object_names = {"WRook1", "WKnight1", "WBishop1", "WQueen", "WKing", "WBishop2", "WKnight2", "WRook2", 
+"WPawn1", "WPawn2", "WPawn3", "WPawn4", "WPawn5", "WPawn6", "WPawn7", "WPawn8",
+"BPawn1", "BPawn2", "BPawn3", "BPawn4", "BPawn5", "BPawn6", "BPawn7", "BPawn8",
+"BRook1", "BKnight1", "BBishop1", "BQueen", "BKing", "BBishop2", "BKnight2", "BRook2"};
 vector<Vector3d> object_pos;
 vector<Vector3d> object_lin_vel;
 vector<Quaterniond> object_ori;
@@ -103,7 +106,7 @@ int main() {
     sim->setCoeffFrictionStatic(0.0);
     sim->setCoeffFrictionDynamic(0.0);
 
-/*
+
 	// fill in object information 
 	for (int i = 0; i < n_objects; ++i) {
 		Eigen::Vector3d _object_pos, _object_lin_vel, _object_ang_vel;
@@ -117,7 +120,7 @@ int main() {
 		object_ori.push_back(_object_ori);
 		object_ang_vel.push_back(_object_ang_vel);
 	}
-*/
+
 
 	/*------- Set up visualization -------*/
 	// set up error callback
@@ -300,13 +303,7 @@ void simulation(Sai2Model::Sai2Model* robot, Simulation::Sai2Simulation* sim) {
 		sim->getJointPositions(robot_name, robot->_q);
 		sim->getJointVelocities(robot_name, robot->_dq);
 		robot->updateKinematics();
-/*
-		// get dynamic object positions
-		for (int i = 0; i < n_objects; ++i) {
-			sim->getObjectPosition(object_names[i], object_pos[i], object_ori[i]);
-			sim->getObjectVelocity(object_names[i], object_lin_vel[i], object_ang_vel[i]);
-		}
-*/
+
 		// write new robot state to redis
 		redis_client.setEigenMatrixJSON(JOINT_ANGLES_KEY, robot->_q);
 		redis_client.setEigenMatrixJSON(JOINT_VELOCITIES_KEY, robot->_dq);

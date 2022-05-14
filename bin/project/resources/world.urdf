@@ -6,7 +6,7 @@
 		<model dir="./resources" path="panda_arm_hand.urdf" name="panda_arm_hand" />
 	</robot>
 
-	<static_object name="Board">
+	<dynamic_object name="Board">
 		<origin xyz="0.4 0.0 0.0" rpy="0 0 1.5708" />
 		<inertial>
         	<origin xyz="0 0 0" rpy="0 0 0" />
@@ -41,7 +41,7 @@
 	            <!--<box size="0.48 0.48 0.02" />-->
 	        </geometry>
 	    </collision>
-	</static_object>
+	</dynamic_object>
 	
 	
 	<dynamic_object name="WRook1">
