@@ -34,7 +34,8 @@ const string CONTROLLER_RUNING_KEY = "sai2::cs225a::controller_running";
 
 
 // dynamic objects information
-const vector<string> object_names = {"WRook1", "WKnight1", "WBishop1", "WQueen", "WKing", "WBishop2", "WKnight2", "WRook2", 
+const vector<string> object_names = {
+"WRook1", "WKnight1", "WBishop1", "WQueen", "WKing", "WBishop2", "WKnight2", "WRook2", 
 "WPawn1", "WPawn2", "WPawn3", "WPawn4", "WPawn5", "WPawn6", "WPawn7", "WPawn8",
 "BPawn1", "BPawn2", "BPawn3", "BPawn4", "BPawn5", "BPawn6", "BPawn7", "BPawn8",
 "BRook1", "BKnight1", "BBishop1", "BQueen", "BKing", "BBishop2", "BKnight2", "BRook2"};
@@ -103,8 +104,8 @@ int main() {
     sim->setCollisionRestitution(0.0);
 
     // set co-efficient of friction
-    sim->setCoeffFrictionStatic(0.0);
-    sim->setCoeffFrictionDynamic(0.0);
+    sim->setCoeffFrictionStatic(0.6);
+    sim->setCoeffFrictionDynamic(0.4);
 
 
 	// fill in object information 
@@ -168,11 +169,11 @@ int main() {
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
 		graphics->updateGraphics(robot_name, robot);
-/*
+
 		for (int i = 0; i < n_objects; ++i) {
 			graphics->updateObjectGraphics(object_names[i], object_pos[i], object_ori[i]);
 		}
-		*/
+		
 		graphics->render(camera_name, width, height);
 
 		// swap buffers
@@ -303,6 +304,12 @@ void simulation(Sai2Model::Sai2Model* robot, Simulation::Sai2Simulation* sim) {
 		sim->getJointPositions(robot_name, robot->_q);
 		sim->getJointVelocities(robot_name, robot->_dq);
 		robot->updateKinematics();
+
+		// get dynamic object positions
+		for (int i = 0; i < n_objects; ++i) {
+			sim->getObjectPosition(object_names[i], object_pos[i], object_ori[i]);
+			sim->getObjectVelocity(object_names[i], object_lin_vel[i], object_ang_vel[i]);
+		}
 
 		// write new robot state to redis
 		redis_client.setEigenMatrixJSON(JOINT_ANGLES_KEY, robot->_q);

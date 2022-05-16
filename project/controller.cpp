@@ -172,7 +172,7 @@ int main(int argc, char* argv[]) {
 		double kvj = 14;
 
 		double speed = 0.3;
-
+/*
 		//x_d << (0.4 + 0.24*sin(PI * time * speed)) , (0.24*cos(PI * time * speed)) , 0.05;// set x_d
 		
 		// set x_d
@@ -199,7 +199,18 @@ int main(int argc, char* argv[]) {
 
 		// calculate command_torques
 		command_torques = Jv.transpose() * F + N.transpose() * (-kp * (robot->_q-q_desired) -kv * (robot->_dq)) + g;
-		
+		*/
+		x_d << (0.4 + 0.24*sin(PI * time * speed)) , (0.24*cos(PI * time * speed)) , 0.05;// set x_d
+
+		x_d_dot << (0.24 * speed *PI*cos(PI * time * speed)) , (-0.24 * speed *PI*sin(PI * time * speed)) , 0;
+
+		// calculate joint_task_torque
+
+		// calculate F
+		F = Lambda * (-kp*(x - x_d) - kv * (x_dot - x_d_dot ));
+
+		// calculate command_torques
+		command_torques = Jv.transpose() * F + N.transpose() * (-kp * (robot->_q-q_desired) -kv * (robot->_dq)) + g;
 
 		// **********************
 		// WRITE YOUR CODE BEFORE

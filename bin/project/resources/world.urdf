@@ -6,8 +6,8 @@
 		<model dir="./resources" path="panda_arm_hand.urdf" name="panda_arm_hand" />
 	</robot>
 
-	<dynamic_object name="Board">
-		<origin xyz="0.4 0.0 0.0" rpy="0 0 1.5708" />
+	<static_object name="Board">
+		<origin xyz="0.4 0.0 -0.001" rpy="0 0 1.5708" />
 		<inertial>
         	<origin xyz="0 0 0" rpy="0 0 0" />
         	<mass value="0" />
@@ -41,15 +41,14 @@
 	            <!--<box size="0.48 0.48 0.02" />-->
 	        </geometry>
 	    </collision>
-	</dynamic_object>
-	
+	</static_object>
 	
 	<dynamic_object name="WRook1">
         <origin xyz="0.61 -0.21 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.0375 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -74,9 +73,9 @@
 <dynamic_object name="WKnight1">
         <origin xyz="0.61 -0.15 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.045 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -101,9 +100,9 @@
 <dynamic_object name="WBishop1">
         <origin xyz="0.61 -0.09 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.05 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -128,9 +127,9 @@
 <dynamic_object name="WQueen">
         <origin xyz="0.61 -0.03 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.06 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -155,9 +154,9 @@
 <dynamic_object name="WKing">
         <origin xyz="0.61 0.03 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.065 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -182,9 +181,9 @@
 <dynamic_object name="WBishop2">
         <origin xyz="0.61 0.09 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.05 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -209,9 +208,9 @@
 <dynamic_object name="WKnight2">
         <origin xyz="0.61 0.15 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.045 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -236,9 +235,9 @@
 <dynamic_object name="WRook2">
         <origin xyz="0.61 0.21 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.0375 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -263,9 +262,9 @@
 <dynamic_object name="WPawn1">
         <origin xyz="0.55 -0.21 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -290,9 +289,9 @@
 <dynamic_object name="WPawn2">
         <origin xyz="0.55 -0.15 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -317,9 +316,9 @@
 <dynamic_object name="WPawn3">
         <origin xyz="0.55 -0.09 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -344,9 +343,9 @@
 <dynamic_object name="WPawn4">
         <origin xyz="0.55 -0.03 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -371,9 +370,9 @@
 <dynamic_object name="WPawn5">
         <origin xyz="0.55 0.03 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -398,9 +397,9 @@
 <dynamic_object name="WPawn6">
         <origin xyz="0.55 0.09 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -425,9 +424,9 @@
 <dynamic_object name="WPawn7">
         <origin xyz="0.55 0.15 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -452,9 +451,9 @@
 <dynamic_object name="WPawn8">
         <origin xyz="0.55 0.21 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -479,9 +478,9 @@
 <dynamic_object name="BPawn1">
         <origin xyz="0.25 -0.21 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -506,9 +505,9 @@
 <dynamic_object name="BPawn2">
         <origin xyz="0.25 -0.15 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -533,9 +532,9 @@
 <dynamic_object name="BPawn3">
         <origin xyz="0.25 -0.09 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -560,9 +559,9 @@
 <dynamic_object name="BPawn4">
         <origin xyz="0.25 -0.03 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -587,9 +586,9 @@
 <dynamic_object name="BPawn5">
         <origin xyz="0.25 0.03 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -614,9 +613,9 @@
 <dynamic_object name="BPawn6">
         <origin xyz="0.25 0.09 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -641,9 +640,9 @@
 <dynamic_object name="BPawn7">
         <origin xyz="0.25 0.15 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -668,9 +667,9 @@
 <dynamic_object name="BPawn8">
         <origin xyz="0.25 0.21 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.03 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -695,9 +694,9 @@
 <dynamic_object name="BRook1">
         <origin xyz="0.19 -0.21 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.0375 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -722,9 +721,9 @@
 <dynamic_object name="BKnight1">
         <origin xyz="0.19 -0.15 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.045 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -749,9 +748,9 @@
 <dynamic_object name="BBishop1">
         <origin xyz="0.19 -0.09 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.05 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -776,9 +775,9 @@
 <dynamic_object name="BQueen">
         <origin xyz="0.19 -0.03 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.06 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -803,9 +802,9 @@
 <dynamic_object name="BKing">
         <origin xyz="0.19 0.03 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.065 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -830,9 +829,9 @@
 <dynamic_object name="BBishop2">
         <origin xyz="0.19 0.09 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.05 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -857,9 +856,9 @@
 <dynamic_object name="BKnight2">
         <origin xyz="0.19 0.15 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.045 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -884,9 +883,9 @@
 <dynamic_object name="BRook2">
         <origin xyz="0.19 0.21 0" rpy="0 0 0" />
         <inertial>
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0  0.0375 " rpy="0 0 0" />
                 <mass value="0.050" />
-                <inertia ixx="1" iyy="1" izz="1" ixy="0" ixz="0" iyz="0" />
+                <inertia ixx="0.0000379" iyy="0.0000379" izz="0.0000225" ixy="0" ixz="0" iyz="0" />
           </inertial>
 
         <visual>
@@ -907,8 +906,6 @@
             </geometry>
         </collision>
     </dynamic_object>
-
-
 
 
 	
