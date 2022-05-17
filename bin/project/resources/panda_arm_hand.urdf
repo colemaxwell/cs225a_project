@@ -142,6 +142,7 @@
           <mesh filename="../../../model/panda/meshes/visual/hand.obj"/>
         </geometry>
       </visual>
+
 <!--       <collision>
         <origin xyz="0 0 0.107" rpy="0 0 -0.78539816339" />
         <geometry>

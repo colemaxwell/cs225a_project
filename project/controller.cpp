@@ -8,24 +8,16 @@
 #include <fstream>
 #include <string>
 
-// definitions for terminal input parsing 
-#define QUESTION_1A   	11
-#define QUESTION_1C   	13
-#define QUESTION_2D   	24
-#define QUESTION_2E   	25
-#define QUESTION_2F   	26
-#define QUESTION_2G   	27
-#define QUESTION_3    	30
-#define QUESTION_4A   	41
-#define QUESTION_4B   	42
-#define QUESTION_5A   	51
-#define QUESTION_5B   	52
-#define QUESTION_5C   	53
-
 // state machine
-#define MOVING_DOWN		0
-#define APPLY_FORCE		1
-#define MOVING_CIRCLE	2
+#define MOVING_TO_PIECE		0
+#define PICKING_DOWN		1
+#define PICKING				2
+#define PICKING_UP			3
+#define MOVING_PIECE		4
+#define PLACING_DOWN		5
+#define PLACING				6
+#define PLACING_UP			7
+#define RETURNING			8
 
 #define PI 3.14159265
 
@@ -49,23 +41,30 @@ const std::string JOINT_ANGLES_KEY = "sai2::cs225a::panda_robot::sensors::q";
 const std::string JOINT_VELOCITIES_KEY = "sai2::cs225a::panda_robot::sensors::dq";
 const std::string EE_FORCE_KEY = "sai2::cs225a::panda_robot::sensors::force";
 const std::string EE_MOMENT_KEY = "sai2::cs225a::panda_robot::sensors::moment";
+const std::string PIECE_POS_KEY = "sai2::cs225a::pieces::pos";
 // - write
 const std::string JOINT_TORQUES_COMMANDED_KEY = "sai2::cs225a::panda_robot::actuators::fgc";
 const string CONTROLLER_RUNING_KEY = "sai2::cs225a::controller_running";
+const std::string PIECE_NAME_KEY = "sai2::cs225a::pieces::name";
 
 unsigned long long controller_counter = 0;
 
-// helper function 
-double sat(double x) {
-	if (abs(x) <= 1.0) {
-		return x;
-	}
-	else {
-		return signbit(x);
-	}
-}
+double grab_height = 0.04;
+double over_height = 0.2;
+const Vector3d home = Vector3d(0.25, 0, over_height);
+Matrix3d point_down;
+Vector2d target_location_board = Vector2d(3, 4);
+std::string target_piece = "BPawn4";
+Vector3d target_piece_pos;
+
+int controller_mode = MOVING_TO_PIECE;
 
 int main(int argc, char* argv[]) {
+
+	double angle = -PI/4;
+	point_down <<cos(angle), sin(angle), 0,
+     			sin(angle), -cos(angle), 0,
+     			0, 0, -1;
 
 	// start redis client
 	auto redis_client = RedisClient();
@@ -85,7 +84,7 @@ int main(int argc, char* argv[]) {
 	// prepare controller
 	int dof = robot->dof();
 	const string ee_link_name = "link7";
-	const Vector3d pos_in_ee_link = Vector3d(0, 0, 0.20);
+	const Vector3d pos_in_ee_link = Vector3d(0, 0, 0.21);
 	VectorXd command_torques = VectorXd::Zero(dof);
 
 	// model quantities for operational space control
@@ -117,8 +116,13 @@ int main(int argc, char* argv[]) {
 
 	redis_client.set(CONTROLLER_RUNING_KEY, "1");
 
-	// for state machine
-	unsigned state = MOVING_DOWN;
+	VectorXd finger_mask = VectorXd(dof);
+	finger_mask <<  0, 0, 0, 0, 0, 0, 0, 1, 1;	
+
+	int failCount = 0;
+	int failMax = 20;
+
+	Vector3d piece_lock;
 
 	while (runloop) {
 		// wait for next scheduled loop
@@ -130,10 +134,13 @@ int main(int argc, char* argv[]) {
 		robot->_dq = redis_client.getEigenMatrixJSON(JOINT_VELOCITIES_KEY);
 		robot->updateModel();
 
+		target_piece_pos = redis_client.getEigenMatrixJSON(PIECE_POS_KEY);
+		target_piece_pos[2] += grab_height;
+
 		// **********************
 		// WRITE YOUR CODE AFTER
 		// **********************
-		Vector3d x, x_d, x_dot, x_d_dot, F, w;
+		Vector3d x, x_d, x_dot, x_d_dot, w;
 		MatrixXd J_bar = MatrixXd::Zero(dof,3);
 		MatrixXd J(6, dof);
 		Matrix3d R;
@@ -164,60 +171,136 @@ int main(int argc, char* argv[]) {
 		q_desired <<0,-0.785398,-0,-2.18166,-0,1.39626,0.1,0,0;
 
 
-		// ---------------------------  question 1 ---------------------------------------
-		
-		double kp = 100;
+		// ---------------------------  controller ---------------------------------------
+		Vector3d delta_phi;
+		Matrix3d R_d;
+		VectorXd F(6);
+
+		double kp = 150;
 		double kv = 20;
-		double kpj = 50;
-		double kvj = 14;
+		double kpRot = 500;
+		double kvRot = 50;
 
-		double speed = 0.3;
-/*
-		//x_d << (0.4 + 0.24*sin(PI * time * speed)) , (0.24*cos(PI * time * speed)) , 0.05;// set x_d
-		
-		// set x_d
-			if (time < 1) {
-				x_d << .7, .2, .7;
-			} else if (time > 1 && time < 2) {
-				x_d << .7, .2, .2;
-			} else if (time > 2 && time < 3) {
-				x_d << .7, .2, .7;
-			} else if (time > 3 && time < 4) {
-				x_d << .5, .5, .7;
-			} else if (time > 4 && time < 5) {
-				x_d << .5, .5, .2;
-			} else {
-				x_d << .5, .5, .7;
+		double kpj = 500;
+		double kvj = 50;
+
+		double open = 0.020;
+		double closed = 0;
+
+		double fingerPos;
+		Vector3d target_location;
+		target_location << 0.71 - 0.10 - target_location_board[1] * 0.06, -0.21 + target_location_board[0] * 0.06, 0;
+
+		Vector3d target_piece_pos_z0 = Vector3d(target_piece_pos[0], target_piece_pos[1], 0);
+
+		R_d = point_down;
+
+		if (controller_mode == MOVING_TO_PIECE){
+			x_d = target_piece_pos_z0;
+			x_d[2] += over_height;
+			fingerPos = open;
+
+		}else if (controller_mode == PICKING_DOWN){
+			x_d = target_piece_pos_z0;
+			x_d[2] += grab_height;
+			fingerPos = open;
+			piece_lock = target_piece_pos_z0;
+
+		}else if (controller_mode == PICKING){
+			x_d = piece_lock;
+			x_d[2] += grab_height;
+			fingerPos = closed;
+
+		}else if (controller_mode == PICKING_UP){
+			x_d = piece_lock;
+			x_d[2] += over_height;
+			fingerPos = closed;
+
+		}else if(controller_mode == MOVING_PIECE){
+			x_d = target_location;
+			x_d[2] += over_height;
+			fingerPos = closed;
+
+		}else if(controller_mode == PLACING_DOWN){
+			x_d = target_location;
+			x_d[2] += grab_height;
+			fingerPos = closed;
+
+		}else if(controller_mode == PLACING){
+			x_d = target_location;
+			x_d[2] += grab_height;
+			fingerPos = open;
+
+		}else if(controller_mode == PLACING_UP){
+			x_d = target_location;
+			x_d[2] += over_height;
+			fingerPos = open;
+
+		}else if(controller_mode == RETURNING){
+			x_d = home;
+			fingerPos = open;
+		}else{
+			cout <<"NO MODE"<< endl;
+		}
+
+		q_desired[7] = fingerPos;
+		q_desired[8] = -fingerPos;
+
+
+		// calculate delta_phi
+		delta_phi.setZero();
+		for (int i = 0; i < 3; i++){
+			delta_phi += -0.5 * R.col(i).cross(R_d.col(i)); //World fixed x,y,z
+		}
+		// calculate pos_d, position desired
+		VectorXd pos_d(6);
+		pos_d << kp*(x_d-x) - kv*x_dot, kpRot*(-delta_phi) - kvRot*w;
+
+		// calculate F
+		F = Lambda0 * pos_d;
+			
+		// calculate command_torques
+		command_torques = J0.transpose() * F + N0.transpose() * (-kpj * (robot->_q-q_desired) -kvj * (robot->_dq)) + g;
+
+		//Moves to next mode
+		VectorXd move_error_vec(6);
+		move_error_vec << x_d-x, -delta_phi;
+		double move_error = move_error_vec.norm();
+
+		double finger_error = (finger_mask.cwiseProduct(robot->_q-q_desired)).norm();
+		if (finger_mask.cwiseProduct(robot->_dq).norm() < 0.001){
+			failCount++;
+			if (failCount > failMax){
+				finger_error = 0;
 			}
+		}else{
+			failCount = 0;
+		}
 
-		x_d_dot << (0.24 * speed *PI*cos(PI * time * speed)) , (-0.24 * speed *PI*sin(PI * time * speed)) , 0;
+		double error = move_error + finger_error * 10;
+		if (error < 0.01 && controller_mode != RETURNING){
+			controller_mode += 1;
+			failCount = 0;
+		}
 
-		// calculate joint_task_torque
+		if(controller_counter % 200 == 0){
+			cout << "state: "<< controller_mode << endl;
+			cout << "failCount: "<< failCount << endl;
+			cout << "x: \n"<< x << endl << endl;
+			cout << "x_d: \n"<< x_d << endl << endl;
+			cout << "error: "<< error << endl;
+			cout << "move error: "<< move_error << endl;
+			cout << "finger error: "<< finger_error << endl;
+			cout << "finger move error: "<< finger_mask.cwiseProduct(robot->_dq).norm() << endl << endl;
+		}
 
-		// calculate F
-		F = Lambda * (-kp*(x - x_d) - kv * (x_dot - x_d_dot ));
+// --------------------------- redis  ---------------------------------------
 
-		// calculate command_torques
-		command_torques = Jv.transpose() * F + N.transpose() * (-kp * (robot->_q-q_desired) -kv * (robot->_dq)) + g;
-		*/
-		x_d << (0.4 + 0.24*sin(PI * time * speed)) , (0.24*cos(PI * time * speed)) , 0.05;// set x_d
-
-		x_d_dot << (0.24 * speed *PI*cos(PI * time * speed)) , (-0.24 * speed *PI*sin(PI * time * speed)) , 0;
-
-		// calculate joint_task_torque
-
-		// calculate F
-		F = Lambda * (-kp*(x - x_d) - kv * (x_dot - x_d_dot ));
-
-		// calculate command_torques
-		command_torques = Jv.transpose() * F + N.transpose() * (-kp * (robot->_q-q_desired) -kv * (robot->_dq)) + g;
-
-		// **********************
-		// WRITE YOUR CODE BEFORE
-		// **********************
-
+		// get next move
+		
 		// send to redis
 		redis_client.setEigenMatrixJSON(JOINT_TORQUES_COMMANDED_KEY, command_torques);
+		redis_client.set(PIECE_NAME_KEY, target_piece);
 
 		controller_counter++;
 

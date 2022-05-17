@@ -28,9 +28,11 @@ int loopFreq = 1000;
 // - write:
 const std::string JOINT_ANGLES_KEY = "sai2::cs225a::panda_robot::sensors::q";
 const std::string JOINT_VELOCITIES_KEY = "sai2::cs225a::panda_robot::sensors::dq";
+const std::string PIECE_POS_KEY = "sai2::cs225a::pieces::pos";
 // - read
 const std::string TORQUES_COMMANDED_KEY = "sai2::cs225a::panda_robot::actuators::fgc";
 const string CONTROLLER_RUNING_KEY = "sai2::cs225a::controller_running";
+const std::string PIECE_NAME_KEY = "sai2::cs225a::pieces::name";
 
 
 // dynamic objects information
@@ -158,6 +160,7 @@ int main() {
 	double last_cursorx, last_cursory;
 
 	redis_client.set(CONTROLLER_RUNING_KEY, "0");
+	redis_client.set(PIECE_NAME_KEY, "WKing");
 	fSimulationRunning = true;
 	thread sim_thread(simulation, robot, sim);
 	
@@ -314,6 +317,12 @@ void simulation(Sai2Model::Sai2Model* robot, Simulation::Sai2Simulation* sim) {
 		// write new robot state to redis
 		redis_client.setEigenMatrixJSON(JOINT_ANGLES_KEY, robot->_q);
 		redis_client.setEigenMatrixJSON(JOINT_VELOCITIES_KEY, robot->_dq);
+
+		std::string target_piece = redis_client.get(PIECE_NAME_KEY);
+		Vector3d target_piece_pos;
+		Quaterniond target_piece_ori;
+		sim->getObjectPosition(target_piece, target_piece_pos, target_piece_ori);
+		redis_client.setEigenMatrixJSON(PIECE_POS_KEY, target_piece_pos);
 
 		//update last time
 		// last_time = curr_time;
