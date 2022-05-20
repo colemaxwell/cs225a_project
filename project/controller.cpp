@@ -131,6 +131,9 @@ int main(int argc, char* argv[]) {
 	int failMax = 20;
 
 	Vector3d piece_lock;
+	double time;
+	double lastWPTime;
+	double nextWPTime;
 
 	while (runloop) {
 	
@@ -138,7 +141,7 @@ int main(int argc, char* argv[]) {
 		
 		// wait for next scheduled loop
 			timer.waitForNextLoop();
-			double time = timer.elapsedTime() - start_time;
+			time = timer.elapsedTime() - start_time;
 
 			// read robot state from redis
 			robot->_q = redis_client.getEigenMatrixJSON(JOINT_ANGLES_KEY);
@@ -161,7 +164,7 @@ int main(int argc, char* argv[]) {
 			// **********************
 			// WRITE YOUR CODE AFTER
 			// **********************
-			Vector3d x, x_d, x_dot, x_d_dot, w;
+			Vector3d x, x_d, waypoint, lastWaypoint, x_dot, v_d, w;
 			MatrixXd J_bar = MatrixXd::Zero(dof,3);
 			MatrixXd J(6, dof);
 			Matrix3d R;
@@ -198,12 +201,14 @@ int main(int argc, char* argv[]) {
 			Matrix3d R_d;
 			VectorXd F(6);
 
-			double kp = 150;
-			double kv = 20;
+			double vMax = 1.5;
+
+			double kp = 500;
+			double kv = 50;
 			double kpRot = 500;
 			double kvRot = 50;
 
-			double kpj = 500;
+			double kpj = 800;
 			double kvj = 50;
 
 			double open = 0.020;
@@ -216,48 +221,48 @@ int main(int argc, char* argv[]) {
 			R_d = point_down;
 
 			if (controller_mode == MOVING_TO_PIECE){
-				x_d = target_piece_pos_z0;
-				x_d[2] += over_height;
+				waypoint = target_piece_pos_z0;
+				waypoint[2] += over_height;
 				fingerPos = open;
 
 			}else if (controller_mode == PICKING_DOWN){
-				x_d = target_piece_pos_z0;
-				x_d[2] += grab_height;
+				waypoint = target_piece_pos_z0;
+				waypoint[2] += grab_height;
 				fingerPos = open;
 				piece_lock = target_piece_pos_z0;
 
 			}else if (controller_mode == PICKING){
-				x_d = piece_lock;
-				x_d[2] += grab_height;
+				waypoint = piece_lock;
+				waypoint[2] += grab_height;
 				fingerPos = closed;
 
 			}else if (controller_mode == PICKING_UP){
-				x_d = piece_lock;
-				x_d[2] += over_height;
+				waypoint = piece_lock;
+				waypoint[2] += over_height;
 				fingerPos = closed;
 
 			}else if(controller_mode == MOVING_PIECE){
-				x_d = final_piece_pos;
-				x_d[2] += over_height;
+				waypoint = final_piece_pos;
+				waypoint[2] += over_height;
 				fingerPos = closed;
 
 			}else if(controller_mode == PLACING_DOWN){
-				x_d = final_piece_pos;
-				x_d[2] += grab_height;
+				waypoint = final_piece_pos;
+				waypoint[2] += grab_height;
 				fingerPos = closed;
 
 			}else if(controller_mode == PLACING){
-				x_d = final_piece_pos;
-				x_d[2] += grab_height;
+				waypoint = final_piece_pos;
+				waypoint[2] += grab_height;
 				fingerPos = open;
 
 			}else if(controller_mode == PLACING_UP){
-				x_d = final_piece_pos;
-				x_d[2] += over_height;
+				waypoint = final_piece_pos;
+				waypoint[2] += over_height;
 				fingerPos = open;
 
 			}else if(controller_mode == RETURNING){
-				x_d = home;
+				waypoint = home;
 				fingerPos = open;
 			}else{
 				cout <<"NO MODE"<< endl;
@@ -265,6 +270,38 @@ int main(int argc, char* argv[]) {
 
 			q_desired[7] = fingerPos;
 			q_desired[8] = -fingerPos;
+
+			//move x_d
+			/*Vector3d dirUnit = (waypoint - lastWaypoint).normalized();
+			nextWPTime = (waypoint - lastWaypoint).norm() / vMax + lastWPTime;
+			double tFactor = (time - lastWPTime) / (nextWPTime - lastWPTime);
+			if (tFactor > 1){
+				tFactor = 1;
+				x_d = waypoint;
+				v_d.setZero();
+			}else{
+				x_d = tFactor * waypoint + (1-tFactor) * lastWaypoint;
+				v_d = dirUnit * vMax;
+			}*/
+			double waypointDis = (waypoint - lastWaypoint).norm();
+			double targetDis = (x - waypoint).norm();
+			Vector3d dirUnit;
+			double vScale;
+
+			if (waypointDis != 0){
+				 dirUnit = -(x - waypoint).normalized();
+				 if (targetDis < 0.02){
+				 	vScale = 0;
+				 }else{
+				 	vScale = 1;
+				 }
+				 	
+				
+			}else{
+				dirUnit.setZero();
+				vScale = 1;
+			}
+			v_d = dirUnit * vMax/2 * vScale;
 
 
 			// calculate delta_phi
@@ -274,7 +311,8 @@ int main(int argc, char* argv[]) {
 			}
 			// calculate pos_d, position desired
 			VectorXd pos_d(6);
-			pos_d << kp*(x_d-x) - kv*x_dot, kpRot*(-delta_phi) - kvRot*w;
+			pos_d << -kp*(x - waypoint) - kv*(x_dot - v_d), kpRot*(-delta_phi) - kvRot*w;
+			//pos_d << -kp*(x - x_d) - kv*(x_dot - v_d), kpRot*(-delta_phi) - kvRot*w;
 
 			// calculate F
 			F = Lambda0 * pos_d;
@@ -284,7 +322,7 @@ int main(int argc, char* argv[]) {
 
 			//Moves to next mode
 			VectorXd move_error_vec(6);
-			move_error_vec << x_d-x, -delta_phi;
+			move_error_vec << waypoint-x, -delta_phi;
 			double move_error = move_error_vec.norm();
 
 			double finger_error = (finger_mask.cwiseProduct(robot->_q-q_desired)).norm();
@@ -300,6 +338,9 @@ int main(int argc, char* argv[]) {
 			double error = move_error + finger_error * 10;
 			if (error < 0.01 && controller_mode != RETURNING){
 				controller_mode += 1;
+				//x_d = waypoint;
+				lastWaypoint = waypoint;
+				//lastWPTime = time;
 				failCount = 0;
 			}
 			else if (error < 0.01 && controller_mode == RETURNING){
@@ -312,7 +353,10 @@ int main(int argc, char* argv[]) {
 				cout << "state: "<< controller_mode << endl;
 				cout << "failCount: "<< failCount << endl;
 				cout << "x: \n"<< x << endl << endl;
-				cout << "x_d: \n"<< x_d << endl << endl;
+				cout << "waypoint: \n"<< waypoint << endl << endl;
+				cout << "v_d: \n"<< v_d << endl << endl;
+				cout << "|v|: "<< x_dot.norm() << endl << endl;
+				cout << "vScale: \n"<< vScale << endl << endl;
 				cout << "error: "<< error << endl;
 				cout << "move error: "<< move_error << endl;
 				cout << "finger error: "<< finger_error << endl;

@@ -8,7 +8,7 @@ from stockfish import Stockfish
 if __name__ == "__main__":
 
 	
-	stockfish = Stockfish(path="/home/colemaxwell/sai2/core/cs225a_project/project/python/stockfish_15_linux_x64/stockfish_15_src/src/stockfish", parameters={"Minimum Thinking Time":10000})
+	stockfish = Stockfish(path="../python/stockfish_15_linux_x64/stockfish_15_src/src/stockfish", parameters={"Minimum Thinking Time":10000})
 	redisClient = redis.Redis()
 	board = chess.Board()
 
@@ -59,7 +59,7 @@ if __name__ == "__main__":
 	
 		ROBOT_RUNNING = redisClient.get(ROBOT_RUNNING_KEY).decode('utf-8')
 		
-		print(ROBOT_RUNNING)
+		#print(ROBOT_RUNNING)
 	
 		if (ROBOT_TURN and ROBOT_RUNNING == '0'):
 			move = stockfish.get_best_move();
