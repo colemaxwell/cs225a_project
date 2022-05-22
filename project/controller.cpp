@@ -9,15 +9,25 @@
 #include <string>
 
 // state machine
-#define MOVING_TO_PIECE		0
+#define MOVING_TO_PIECE	0
 #define PICKING_DOWN		1
-#define PICKING				2
-#define PICKING_UP			3
+#define PICKING		2
+#define PICKING_UP		3
 #define MOVING_PIECE		4
 #define PLACING_DOWN		5
-#define PLACING				6
-#define PLACING_UP			7
-#define RETURNING			8
+#define PLACING		6
+#define PLACING_UP		7
+#define RETURNING		8
+
+
+#define MOVING_TO_PIECE	0
+#define PICKING_DOWN		1
+#define PICKING		2
+#define PICKING_UP		3
+#define MOVING_PIECE		4
+#define DROPPING		5
+#define LIFTING		7
+#define RETURNING_2		8
 
 #define PI 3.14159265
 
@@ -65,6 +75,7 @@ std::string target_piece = "BPawn4";
 Vector3d target_piece_pos;
 
 int controller_mode = MOVING_TO_PIECE;
+int controller_mode2 = MOVING_TO_PIECE;
 
 int main(int argc, char* argv[]) {
 
@@ -177,7 +188,6 @@ int main(int argc, char* argv[]) {
 			robot->Jv(Jv, ee_link_name, pos_in_ee_link);
 			robot->J_0(J0, ee_link_name, pos_in_ee_link);
 
-
 			robot->taskInertiaMatrix(Lambda, Jv);
 			robot->taskInertiaMatrix(Lambda0, J0);
 
@@ -194,7 +204,7 @@ int main(int argc, char* argv[]) {
 			VectorXd q_desired(dof);
 			q_desired <<0,-0.785398,-0,-2.18166,-0,1.39626,0.1,0,0;
 
-			if (ROBOT_RUNNING == "1") {
+			if (ROBOT_RUNNING == "1" || ROBOT_RUNNING == "2") {
 
 			// ---------------------------  controller ---------------------------------------
 			Vector3d delta_phi;
@@ -219,55 +229,107 @@ int main(int argc, char* argv[]) {
 			Vector3d target_piece_pos_z0 = Vector3d(initial_piece_pos[0], initial_piece_pos[1], 0);
 
 			R_d = point_down;
+			
+			if (ROBOT_RUNNING == "1") {
 
-			if (controller_mode == MOVING_TO_PIECE){
-				waypoint = target_piece_pos_z0;
-				waypoint[2] += over_height;
-				fingerPos = open;
+				if (controller_mode == MOVING_TO_PIECE){
+					waypoint = target_piece_pos_z0;
+					waypoint[2] += over_height;
+					fingerPos = open;
 
-			}else if (controller_mode == PICKING_DOWN){
-				waypoint = target_piece_pos_z0;
-				waypoint[2] += grab_height;
-				fingerPos = open;
-				piece_lock = target_piece_pos_z0;
+				}else if (controller_mode == PICKING_DOWN){
+					waypoint = target_piece_pos_z0;
+					waypoint[2] += grab_height;
+					fingerPos = open;
+					piece_lock = target_piece_pos_z0;
 
-			}else if (controller_mode == PICKING){
-				waypoint = piece_lock;
-				waypoint[2] += grab_height;
-				fingerPos = closed;
+				}else if (controller_mode == PICKING){
+					waypoint = piece_lock;
+					waypoint[2] += grab_height;
+					fingerPos = closed;
 
-			}else if (controller_mode == PICKING_UP){
-				waypoint = piece_lock;
-				waypoint[2] += over_height;
-				fingerPos = closed;
+				}else if (controller_mode == PICKING_UP){
+					waypoint = piece_lock;
+					waypoint[2] += over_height;
+					fingerPos = closed;
 
-			}else if(controller_mode == MOVING_PIECE){
-				waypoint = final_piece_pos;
-				waypoint[2] += over_height;
-				fingerPos = closed;
+				}else if(controller_mode == MOVING_PIECE){
+					waypoint = final_piece_pos;
+					waypoint[2] += over_height;
+					fingerPos = closed;
 
-			}else if(controller_mode == PLACING_DOWN){
-				waypoint = final_piece_pos;
-				waypoint[2] += grab_height;
-				fingerPos = closed;
+				}else if(controller_mode == PLACING_DOWN){
+					waypoint = final_piece_pos;
+					waypoint[2] += grab_height;
+					fingerPos = closed;
 
-			}else if(controller_mode == PLACING){
-				waypoint = final_piece_pos;
-				waypoint[2] += grab_height;
-				fingerPos = open;
+				}else if(controller_mode == PLACING){
+					waypoint = final_piece_pos;
+					waypoint[2] += grab_height;
+					fingerPos = open;
 
-			}else if(controller_mode == PLACING_UP){
-				waypoint = final_piece_pos;
-				waypoint[2] += over_height;
-				fingerPos = open;
+				}else if(controller_mode == PLACING_UP){
+					waypoint = final_piece_pos;
+					waypoint[2] += over_height;
+					fingerPos = open;
 
-			}else if(controller_mode == RETURNING){
-				waypoint = home;
-				fingerPos = open;
-			}else{
-				cout <<"NO MODE"<< endl;
+				}else if(controller_mode == RETURNING){
+					waypoint = home;
+					fingerPos = open;
+				}else{
+					cout <<"NO MODE"<< endl;
+				}
 			}
+			
+			
+			if (ROBOT_RUNNING == "2") {
 
+				if (controller_mode2 == MOVING_TO_PIECE){
+					waypoint = target_piece_pos_z0;
+					waypoint[2] += over_height;
+					fingerPos = open;
+
+				}else if (controller_mode2 == PICKING_DOWN){
+					waypoint = target_piece_pos_z0;
+					waypoint[2] += grab_height;
+					fingerPos = open;
+					piece_lock = target_piece_pos_z0;
+
+				}else if (controller_mode2 == PICKING){
+					waypoint = piece_lock;
+					waypoint[2] += grab_height;
+					fingerPos = closed;
+
+				}else if (controller_mode2 == PICKING_UP){
+					waypoint = piece_lock;
+					waypoint[2] += over_height;
+					fingerPos = closed;
+
+				}else if(controller_mode2 == MOVING_PIECE){
+					waypoint = final_piece_pos;
+					waypoint[2] += over_height;
+					fingerPos = closed;
+
+				}else if(controller_mode2 == DROPPING){
+					waypoint = final_piece_pos;
+					waypoint[2] += grab_height;
+					fingerPos = open;
+
+				}
+				else if(controller_mode2 == LIFTING){
+					waypoint = final_piece_pos;
+					waypoint[2] += 2*grab_height;
+					fingerPos = open;
+				}
+				else if(controller_mode2 == RETURNING_2){
+					waypoint = home;
+					fingerPos = open;
+				}else{
+					cout <<"NO MODE"<< endl;
+				}
+			}
+			
+			
 			q_desired[7] = fingerPos;
 			q_desired[8] = -fingerPos;
 
@@ -336,21 +398,30 @@ int main(int argc, char* argv[]) {
 			}
 
 			double error = move_error + finger_error * 10;
-			if (error < 0.01 && controller_mode != RETURNING){
+			if (error < 0.01 && ((controller_mode != RETURNING && ROBOT_RUNNING == "1") || (controller_mode2 != RETURNING_2 && ROBOT_RUNNING == "2"))) {
+			
+				if (ROBOT_RUNNING == "1") {
 				controller_mode += 1;
+				}
+				else {
+				 controller_mode2 += 1;
+				}
 				//x_d = waypoint;
 				lastWaypoint = waypoint;
 				//lastWPTime = time;
 				failCount = 0;
 			}
-			else if (error < 0.01 && controller_mode == RETURNING){
+			else if (error < 0.01 && (controller_mode == RETURNING || controller_mode2 == RETURNING_2)){
 				controller_mode = 0;
+				controller_mode2 = 0;
 				redis_client.set(ROBOT_RUNNING_KEY, "0");
 			}
 			
 
 			if(controller_counter % 200 == 0){
+				cout << ROBOT_RUNNING_KEY << endl;
 				cout << "state: "<< controller_mode << endl;
+				cout << "state: "<< controller_mode2 << endl;
 				cout << "failCount: "<< failCount << endl;
 				cout << "x: \n"<< x << endl << endl;
 				cout << "waypoint: \n"<< waypoint << endl << endl;
@@ -372,6 +443,7 @@ int main(int argc, char* argv[]) {
 		
 		if(controller_counter % 200 == 0){
 				cout << "state: "<< controller_mode << endl;
+				cout << "state: "<< controller_mode2 << endl;
 				cout << "robot running "<< ROBOT_RUNNING << endl << endl;
 			}
 		

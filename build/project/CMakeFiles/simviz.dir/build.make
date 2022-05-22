@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/connor/sai2/core/cs225a_project
+CMAKE_SOURCE_DIR = /home/colemaxwell/sai2/core/cs225a_project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/connor/sai2/core/cs225a_project/build
+CMAKE_BINARY_DIR = /home/colemaxwell/sai2/core/cs225a_project/build
 
 # Include any dependencies generated for this target.
 include project/CMakeFiles/simviz.dir/depend.make
@@ -59,16 +59,16 @@ include project/CMakeFiles/simviz.dir/flags.make
 
 project/CMakeFiles/simviz.dir/simviz.cpp.o: project/CMakeFiles/simviz.dir/flags.make
 project/CMakeFiles/simviz.dir/simviz.cpp.o: ../project/simviz.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/connor/sai2/core/cs225a_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object project/CMakeFiles/simviz.dir/simviz.cpp.o"
-	cd /home/connor/sai2/core/cs225a_project/build/project && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/simviz.dir/simviz.cpp.o -c /home/connor/sai2/core/cs225a_project/project/simviz.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/colemaxwell/sai2/core/cs225a_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object project/CMakeFiles/simviz.dir/simviz.cpp.o"
+	cd /home/colemaxwell/sai2/core/cs225a_project/build/project && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/simviz.dir/simviz.cpp.o -c /home/colemaxwell/sai2/core/cs225a_project/project/simviz.cpp
 
 project/CMakeFiles/simviz.dir/simviz.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/simviz.dir/simviz.cpp.i"
-	cd /home/connor/sai2/core/cs225a_project/build/project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/connor/sai2/core/cs225a_project/project/simviz.cpp > CMakeFiles/simviz.dir/simviz.cpp.i
+	cd /home/colemaxwell/sai2/core/cs225a_project/build/project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/colemaxwell/sai2/core/cs225a_project/project/simviz.cpp > CMakeFiles/simviz.dir/simviz.cpp.i
 
 project/CMakeFiles/simviz.dir/simviz.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/simviz.dir/simviz.cpp.s"
-	cd /home/connor/sai2/core/cs225a_project/build/project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/connor/sai2/core/cs225a_project/project/simviz.cpp -o CMakeFiles/simviz.dir/simviz.cpp.s
+	cd /home/colemaxwell/sai2/core/cs225a_project/build/project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/colemaxwell/sai2/core/cs225a_project/project/simviz.cpp -o CMakeFiles/simviz.dir/simviz.cpp.s
 
 # Object files for target simviz
 simviz_OBJECTS = \
@@ -79,31 +79,31 @@ simviz_EXTERNAL_OBJECTS =
 
 ../bin/project/simviz: project/CMakeFiles/simviz.dir/simviz.cpp.o
 ../bin/project/simviz: project/CMakeFiles/simviz.dir/build.make
-../bin/project/simviz: /home/connor/sai2/core/sai2-common/build/libsai2-common.a
-../bin/project/simviz: /home/connor/sai2/core/chai3d/build/libchai3d.a
+../bin/project/simviz: /home/colemaxwell/sai2/core/sai2-common/build/libsai2-common.a
+../bin/project/simviz: /home/colemaxwell/sai2/core/chai3d/build/libchai3d.a
 ../bin/project/simviz: /usr/lib/x86_64-linux-gnu/libGL.so
 ../bin/project/simviz: /usr/lib/x86_64-linux-gnu/libGLU.so
-../bin/project/simviz: /home/connor/sai2/core/sai2-urdfreader/build/libsai2-urdf.a
+../bin/project/simviz: /home/colemaxwell/sai2/core/sai2-urdfreader/build/libsai2-urdf.a
 ../bin/project/simviz: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
-../bin/project/simviz: /home/connor/sai2/core/sai2-simulation/build/libsai2-simulation.a
-../bin/project/simviz: /home/connor/sai2/core/sai2-model/build/libsai2-model.a
-../bin/project/simviz: /home/connor/sai2/core/sai2-urdfreader/build/libsai2-urdf.a
+../bin/project/simviz: /home/colemaxwell/sai2/core/sai2-simulation/build/libsai2-simulation.a
+../bin/project/simviz: /home/colemaxwell/sai2/core/sai2-model/build/libsai2-model.a
+../bin/project/simviz: /home/colemaxwell/sai2/core/sai2-urdfreader/build/libsai2-urdf.a
 ../bin/project/simviz: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
-../bin/project/simviz: /home/connor/sai2/core/sai2-model/rbdl/build/librbdl.so
-../bin/project/simviz: /home/connor/sai2/core/sai2-graphics/build/libsai2-graphics.a
-../bin/project/simviz: /home/connor/sai2/core/sai2-urdfreader/build/libsai2-urdf.a
+../bin/project/simviz: /home/colemaxwell/sai2/core/sai2-model/rbdl/build/librbdl.so
+../bin/project/simviz: /home/colemaxwell/sai2/core/sai2-graphics/build/libsai2-graphics.a
+../bin/project/simviz: /home/colemaxwell/sai2/core/sai2-urdfreader/build/libsai2-urdf.a
 ../bin/project/simviz: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
-../bin/project/simviz: /home/connor/sai2/core/chai3d/build/libchai3d.a
+../bin/project/simviz: /home/colemaxwell/sai2/core/chai3d/build/libchai3d.a
 ../bin/project/simviz: /usr/lib/x86_64-linux-gnu/libGL.so
 ../bin/project/simviz: /usr/lib/x86_64-linux-gnu/libGLU.so
 ../bin/project/simviz: /usr/lib/x86_64-linux-gnu/libhiredis.so
 ../bin/project/simviz: /usr/lib/x86_64-linux-gnu/libglfw.so
-../bin/project/simviz: /home/connor/sai2/core/sai2-model/rbdl/build/librbdl.so
+../bin/project/simviz: /home/colemaxwell/sai2/core/sai2-model/rbdl/build/librbdl.so
 ../bin/project/simviz: /usr/lib/x86_64-linux-gnu/libhiredis.so
 ../bin/project/simviz: /usr/lib/x86_64-linux-gnu/libglfw.so
 ../bin/project/simviz: project/CMakeFiles/simviz.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/connor/sai2/core/cs225a_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../../bin/project/simviz"
-	cd /home/connor/sai2/core/cs225a_project/build/project && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/simviz.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/colemaxwell/sai2/core/cs225a_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../../bin/project/simviz"
+	cd /home/colemaxwell/sai2/core/cs225a_project/build/project && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/simviz.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 project/CMakeFiles/simviz.dir/build: ../bin/project/simviz
@@ -111,10 +111,10 @@ project/CMakeFiles/simviz.dir/build: ../bin/project/simviz
 .PHONY : project/CMakeFiles/simviz.dir/build
 
 project/CMakeFiles/simviz.dir/clean:
-	cd /home/connor/sai2/core/cs225a_project/build/project && $(CMAKE_COMMAND) -P CMakeFiles/simviz.dir/cmake_clean.cmake
+	cd /home/colemaxwell/sai2/core/cs225a_project/build/project && $(CMAKE_COMMAND) -P CMakeFiles/simviz.dir/cmake_clean.cmake
 .PHONY : project/CMakeFiles/simviz.dir/clean
 
 project/CMakeFiles/simviz.dir/depend:
-	cd /home/connor/sai2/core/cs225a_project/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/connor/sai2/core/cs225a_project /home/connor/sai2/core/cs225a_project/project /home/connor/sai2/core/cs225a_project/build /home/connor/sai2/core/cs225a_project/build/project /home/connor/sai2/core/cs225a_project/build/project/CMakeFiles/simviz.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/colemaxwell/sai2/core/cs225a_project /home/colemaxwell/sai2/core/cs225a_project/project /home/colemaxwell/sai2/core/cs225a_project/build /home/colemaxwell/sai2/core/cs225a_project/build/project /home/colemaxwell/sai2/core/cs225a_project/build/project/CMakeFiles/simviz.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : project/CMakeFiles/simviz.dir/depend
 

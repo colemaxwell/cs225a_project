@@ -70,10 +70,22 @@ if __name__ == "__main__":
 			CHESS_PIECE = chessboard_dictionary[initial_position]
 			FINAL_POSITION = chessboard_grid_positions[final_position]
 			INITIAL_POSITION = chessboard_grid_positions[initial_position]
+			print("move1: " + str(move))
 			
+			if (chessboard_dictionary[final_position] != ""):
+				redisClient.set(FINAL_PIECE_LOCATION_KEY_X,str(0.37))
+				redisClient.set(FINAL_PIECE_LOCATION_KEY_Y,str(0.3))
+				redisClient.set(INITIAL_PIECE_LOCATION_KEY_X,str(FINAL_POSITION[0]))
+				redisClient.set(INITIAL_PIECE_LOCATION_KEY_Y,str(FINAL_POSITION[1]))
+				redisClient.set(ROBOT_RUNNING_KEY,'2')
+				ROBOT_RUNNING = '2'
+				while (ROBOT_RUNNING == '2'):
+					ROBOT_RUNNING = redisClient.get(ROBOT_RUNNING_KEY).decode('utf-8')
+			
+							
 			chessboard_dictionary[initial_position] = ""
 			chessboard_dictionary[final_position] = CHESS_PIECE
-			
+									
 			redisClient.set(PIECE_NAME_KEY, CHESS_PIECE)
 			redisClient.set(FINAL_PIECE_LOCATION_KEY_X,str(FINAL_POSITION[0]))
 			redisClient.set(FINAL_PIECE_LOCATION_KEY_Y,str(FINAL_POSITION[1]))
@@ -93,6 +105,17 @@ if __name__ == "__main__":
 			CHESS_PIECE = chessboard_dictionary[initial_position]
 			FINAL_POSITION = chessboard_grid_positions[final_position]
 			INITIAL_POSITION = chessboard_grid_positions[initial_position]
+			print("move2: " + str(move))
+			
+			if (chessboard_dictionary[final_position] != ""):			
+				redisClient.set(FINAL_PIECE_LOCATION_KEY_X,str(0.37))
+				redisClient.set(FINAL_PIECE_LOCATION_KEY_Y,str(0.3))
+				redisClient.set(INITIAL_PIECE_LOCATION_KEY_X,str(FINAL_POSITION[0]))
+				redisClient.set(INITIAL_PIECE_LOCATION_KEY_Y,str(FINAL_POSITION[1]))
+				redisClient.set(ROBOT_RUNNING_KEY,'2')
+				ROBOT_RUNNING = '2'
+				while (ROBOT_RUNNING == '2'):
+					ROBOT_RUNNING = redisClient.get(ROBOT_RUNNING_KEY).decode('utf-8')
 			
 			chessboard_dictionary[initial_position] = ""
 			chessboard_dictionary[final_position] = CHESS_PIECE

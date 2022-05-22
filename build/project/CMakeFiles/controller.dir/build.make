@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/connor/sai2/core/cs225a_project
+CMAKE_SOURCE_DIR = /home/colemaxwell/sai2/core/cs225a_project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/connor/sai2/core/cs225a_project/build
+CMAKE_BINARY_DIR = /home/colemaxwell/sai2/core/cs225a_project/build
 
 # Include any dependencies generated for this target.
 include project/CMakeFiles/controller.dir/depend.make
@@ -59,16 +59,16 @@ include project/CMakeFiles/controller.dir/flags.make
 
 project/CMakeFiles/controller.dir/controller.cpp.o: project/CMakeFiles/controller.dir/flags.make
 project/CMakeFiles/controller.dir/controller.cpp.o: ../project/controller.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/connor/sai2/core/cs225a_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object project/CMakeFiles/controller.dir/controller.cpp.o"
-	cd /home/connor/sai2/core/cs225a_project/build/project && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/controller.dir/controller.cpp.o -c /home/connor/sai2/core/cs225a_project/project/controller.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/colemaxwell/sai2/core/cs225a_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object project/CMakeFiles/controller.dir/controller.cpp.o"
+	cd /home/colemaxwell/sai2/core/cs225a_project/build/project && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/controller.dir/controller.cpp.o -c /home/colemaxwell/sai2/core/cs225a_project/project/controller.cpp
 
 project/CMakeFiles/controller.dir/controller.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/controller.dir/controller.cpp.i"
-	cd /home/connor/sai2/core/cs225a_project/build/project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/connor/sai2/core/cs225a_project/project/controller.cpp > CMakeFiles/controller.dir/controller.cpp.i
+	cd /home/colemaxwell/sai2/core/cs225a_project/build/project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/colemaxwell/sai2/core/cs225a_project/project/controller.cpp > CMakeFiles/controller.dir/controller.cpp.i
 
 project/CMakeFiles/controller.dir/controller.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/controller.dir/controller.cpp.s"
-	cd /home/connor/sai2/core/cs225a_project/build/project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/connor/sai2/core/cs225a_project/project/controller.cpp -o CMakeFiles/controller.dir/controller.cpp.s
+	cd /home/colemaxwell/sai2/core/cs225a_project/build/project && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/colemaxwell/sai2/core/cs225a_project/project/controller.cpp -o CMakeFiles/controller.dir/controller.cpp.s
 
 # Object files for target controller
 controller_OBJECTS = \
@@ -79,31 +79,31 @@ controller_EXTERNAL_OBJECTS =
 
 ../bin/project/controller: project/CMakeFiles/controller.dir/controller.cpp.o
 ../bin/project/controller: project/CMakeFiles/controller.dir/build.make
-../bin/project/controller: /home/connor/sai2/core/sai2-common/build/libsai2-common.a
-../bin/project/controller: /home/connor/sai2/core/chai3d/build/libchai3d.a
+../bin/project/controller: /home/colemaxwell/sai2/core/sai2-common/build/libsai2-common.a
+../bin/project/controller: /home/colemaxwell/sai2/core/chai3d/build/libchai3d.a
 ../bin/project/controller: /usr/lib/x86_64-linux-gnu/libGL.so
 ../bin/project/controller: /usr/lib/x86_64-linux-gnu/libGLU.so
-../bin/project/controller: /home/connor/sai2/core/sai2-urdfreader/build/libsai2-urdf.a
+../bin/project/controller: /home/colemaxwell/sai2/core/sai2-urdfreader/build/libsai2-urdf.a
 ../bin/project/controller: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
-../bin/project/controller: /home/connor/sai2/core/sai2-simulation/build/libsai2-simulation.a
-../bin/project/controller: /home/connor/sai2/core/sai2-model/build/libsai2-model.a
-../bin/project/controller: /home/connor/sai2/core/sai2-urdfreader/build/libsai2-urdf.a
+../bin/project/controller: /home/colemaxwell/sai2/core/sai2-simulation/build/libsai2-simulation.a
+../bin/project/controller: /home/colemaxwell/sai2/core/sai2-model/build/libsai2-model.a
+../bin/project/controller: /home/colemaxwell/sai2/core/sai2-urdfreader/build/libsai2-urdf.a
 ../bin/project/controller: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
-../bin/project/controller: /home/connor/sai2/core/sai2-model/rbdl/build/librbdl.so
-../bin/project/controller: /home/connor/sai2/core/sai2-graphics/build/libsai2-graphics.a
-../bin/project/controller: /home/connor/sai2/core/sai2-urdfreader/build/libsai2-urdf.a
+../bin/project/controller: /home/colemaxwell/sai2/core/sai2-model/rbdl/build/librbdl.so
+../bin/project/controller: /home/colemaxwell/sai2/core/sai2-graphics/build/libsai2-graphics.a
+../bin/project/controller: /home/colemaxwell/sai2/core/sai2-urdfreader/build/libsai2-urdf.a
 ../bin/project/controller: /usr/lib/x86_64-linux-gnu/libtinyxml2.so
-../bin/project/controller: /home/connor/sai2/core/chai3d/build/libchai3d.a
+../bin/project/controller: /home/colemaxwell/sai2/core/chai3d/build/libchai3d.a
 ../bin/project/controller: /usr/lib/x86_64-linux-gnu/libGL.so
 ../bin/project/controller: /usr/lib/x86_64-linux-gnu/libGLU.so
 ../bin/project/controller: /usr/lib/x86_64-linux-gnu/libhiredis.so
 ../bin/project/controller: /usr/lib/x86_64-linux-gnu/libglfw.so
-../bin/project/controller: /home/connor/sai2/core/sai2-model/rbdl/build/librbdl.so
+../bin/project/controller: /home/colemaxwell/sai2/core/sai2-model/rbdl/build/librbdl.so
 ../bin/project/controller: /usr/lib/x86_64-linux-gnu/libhiredis.so
 ../bin/project/controller: /usr/lib/x86_64-linux-gnu/libglfw.so
 ../bin/project/controller: project/CMakeFiles/controller.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/connor/sai2/core/cs225a_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../../bin/project/controller"
-	cd /home/connor/sai2/core/cs225a_project/build/project && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/controller.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/colemaxwell/sai2/core/cs225a_project/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../../bin/project/controller"
+	cd /home/colemaxwell/sai2/core/cs225a_project/build/project && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/controller.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 project/CMakeFiles/controller.dir/build: ../bin/project/controller
@@ -111,10 +111,10 @@ project/CMakeFiles/controller.dir/build: ../bin/project/controller
 .PHONY : project/CMakeFiles/controller.dir/build
 
 project/CMakeFiles/controller.dir/clean:
-	cd /home/connor/sai2/core/cs225a_project/build/project && $(CMAKE_COMMAND) -P CMakeFiles/controller.dir/cmake_clean.cmake
+	cd /home/colemaxwell/sai2/core/cs225a_project/build/project && $(CMAKE_COMMAND) -P CMakeFiles/controller.dir/cmake_clean.cmake
 .PHONY : project/CMakeFiles/controller.dir/clean
 
 project/CMakeFiles/controller.dir/depend:
-	cd /home/connor/sai2/core/cs225a_project/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/connor/sai2/core/cs225a_project /home/connor/sai2/core/cs225a_project/project /home/connor/sai2/core/cs225a_project/build /home/connor/sai2/core/cs225a_project/build/project /home/connor/sai2/core/cs225a_project/build/project/CMakeFiles/controller.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/colemaxwell/sai2/core/cs225a_project /home/colemaxwell/sai2/core/cs225a_project/project /home/colemaxwell/sai2/core/cs225a_project/build /home/colemaxwell/sai2/core/cs225a_project/build/project /home/colemaxwell/sai2/core/cs225a_project/build/project/CMakeFiles/controller.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : project/CMakeFiles/controller.dir/depend
 
