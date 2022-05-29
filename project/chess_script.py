@@ -11,7 +11,6 @@ if __name__ == "__main__":
 	stockfish = Stockfish(path="../python/stockfish_15_linux_x64/stockfish_15_src/src/stockfish", parameters={"Minimum Thinking Time":10000})
 	redisClient = redis.Redis()
 	board = chess.Board()
-
 	
 	n_rows = 8
 	n_cols = 8
@@ -52,8 +51,17 @@ if __name__ == "__main__":
 	INITIAL_PIECE_LOCATION_KEY_X = "sai2::cs225a::pieces::initial_pos_x";
 	INITIAL_PIECE_LOCATION_KEY_Y = "sai2::cs225a::pieces::initial_pos_y";
 	ROBOT_RUNNING_KEY = "sai2::cs225a::state::dynamics";
+	READY_SCAN_BOARD_INITIAL_KEY = 'READY_SCAN_BOARD_INITIAL'
+	READY_SCAN_BOARD_FINAL_KEY = 'READY_SCAN_BOARD_FINAL'
+	PLAYER_MOVE_KEY = 'PLAYER_MOVE_KEY'
 	
 	redisClient.set(ROBOT_RUNNING_KEY, '0')
+	redisClient.set(READY_SCAN_BOARD_INITIAL_KEY, '0')
+	redisClient.set(READY_SCAN_BOARD_FINAL_KEY, '0')
+	redisClient.set('PLAYER_MOVE_KEY', '0')
+	USER_READY = 0
+	READY_SCAN_BOARD_INITIAL = '0'
+	READY_SCAN_BOARD_FINAL = '0'
 	
 	while(GAME_STATE):
 	
@@ -97,38 +105,99 @@ if __name__ == "__main__":
 			ROBOT_TURN = False
 		
 		elif (PLAYER_TURN and ROBOT_RUNNING == '0'):
-			move = stockfish.get_best_move();
-			stockfish.make_moves_from_current_position([move])
-			initial_position = move[0:2]
-			final_position = move[2:]
+				
+			while (READY_SCAN_BOARD_INITIAL != '1'):
+				READY_SCAN_BOARD_INITIAL = input("Enter 1 if you the initial board is ready to be scanned")
+				print(type(READY_SCAN_BOARD_INITIAL))
+				
+			redisClient.set(READY_SCAN_BOARD_INITIAL_KEY, READY_SCAN_BOARD_INITIAL)
+					
+			time.sleep(1)
 			
-			CHESS_PIECE = chessboard_dictionary[initial_position]
-			FINAL_POSITION = chessboard_grid_positions[final_position]
-			INITIAL_POSITION = chessboard_grid_positions[initial_position]
-			print("move2: " + str(move))
+			while (READY_SCAN_BOARD_FINAL != '1'):
+				READY_SCAN_BOARD_FINAL = input("Enter 1 if you the initial board is ready to be scanned") 
+				
+			redisClient.set(READY_SCAN_BOARD_FINAL_KEY, READY_SCAN_BOARD_FINAL)
 			
-			if (chessboard_dictionary[final_position] != ""):			
-				redisClient.set(FINAL_PIECE_LOCATION_KEY_X,str(0.37))
-				redisClient.set(FINAL_PIECE_LOCATION_KEY_Y,str(0.3))
-				redisClient.set(INITIAL_PIECE_LOCATION_KEY_X,str(FINAL_POSITION[0]))
-				redisClient.set(INITIAL_PIECE_LOCATION_KEY_Y,str(FINAL_POSITION[1]))
-				redisClient.set(ROBOT_RUNNING_KEY,'2')
-				ROBOT_RUNNING = '2'
-				while (ROBOT_RUNNING == '2'):
-					ROBOT_RUNNING = redisClient.get(ROBOT_RUNNING_KEY).decode('utf-8')
+			time.sleep(1)
 			
-			chessboard_dictionary[initial_position] = ""
-			chessboard_dictionary[final_position] = CHESS_PIECE
+			move = redisClient.get(PLAYER_MOVE_KEY).decode('utf-8')
 			
-			redisClient.set(PIECE_NAME_KEY, CHESS_PIECE)
-			redisClient.set(FINAL_PIECE_LOCATION_KEY_X,str(FINAL_POSITION[0]))
-			redisClient.set(FINAL_PIECE_LOCATION_KEY_Y,str(FINAL_POSITION[1]))
-			redisClient.set(INITIAL_PIECE_LOCATION_KEY_X,str(INITIAL_POSITION[0]))
-			redisClient.set(INITIAL_PIECE_LOCATION_KEY_Y,str(INITIAL_POSITION[1]))
-			redisClient.set(ROBOT_RUNNING_KEY,'1')
-									
-			ROBOT_TURN = True
-			PLAYER_TURN = False
+			READY_SCAN_BOARD_INITIAL = '0'
+			READY_SCAN_BOARD_FINAL = '0'
+			
+			redisClient.set('READY_SCAN_BOARD_INITIAL', READY_SCAN_BOARD_INITIAL)
+			redisClient.set('READY_SCAN_BOARD_FINAL', READY_SCAN_BOARD_INITIAL)
+			
+			print("The inputted move is " + move + ".")
+			
+			correct_move = input("Input 1 if the inputted move is correct.")
+			
+			if (correct_move != "1"):
+				move = stockfish.get_best_move();
+				stockfish.make_moves_from_current_position([move])
+				initial_position = move[0:2]
+				final_position = move[2:]
+				
+				CHESS_PIECE = chessboard_dictionary[initial_position]
+				FINAL_POSITION = chessboard_grid_positions[final_position]
+				INITIAL_POSITION = chessboard_grid_positions[initial_position]
+				print("move2: " + str(move))
+				
+				if (chessboard_dictionary[final_position] != ""):			
+					redisClient.set(FINAL_PIECE_LOCATION_KEY_X,str(0.37))
+					redisClient.set(FINAL_PIECE_LOCATION_KEY_Y,str(0.3))
+					redisClient.set(INITIAL_PIECE_LOCATION_KEY_X,str(FINAL_POSITION[0]))
+					redisClient.set(INITIAL_PIECE_LOCATION_KEY_Y,str(FINAL_POSITION[1]))
+					redisClient.set(ROBOT_RUNNING_KEY,'2')
+					ROBOT_RUNNING = '2'
+					while (ROBOT_RUNNING == '2'):
+						ROBOT_RUNNING = redisClient.get(ROBOT_RUNNING_KEY).decode('utf-8')
+				
+				chessboard_dictionary[initial_position] = ""
+				chessboard_dictionary[final_position] = CHESS_PIECE
+				
+				redisClient.set(PIECE_NAME_KEY, CHESS_PIECE)
+				redisClient.set(FINAL_PIECE_LOCATION_KEY_X,str(FINAL_POSITION[0]))
+				redisClient.set(FINAL_PIECE_LOCATION_KEY_Y,str(FINAL_POSITION[1]))
+				redisClient.set(INITIAL_PIECE_LOCATION_KEY_X,str(INITIAL_POSITION[0]))
+				redisClient.set(INITIAL_PIECE_LOCATION_KEY_Y,str(INITIAL_POSITION[1]))
+				redisClient.set(ROBOT_RUNNING_KEY,'1')
+										
+				ROBOT_TURN = True
+				PLAYER_TURN = False
+			else:
+				stockfish.make_moves_from_current_position([move])
+				initial_position = move[0:2]
+				final_position = move[2:]
+				
+				CHESS_PIECE = chessboard_dictionary[initial_position]
+				FINAL_POSITION = chessboard_grid_positions[final_position]
+				INITIAL_POSITION = chessboard_grid_positions[initial_position]
+				print("move2: " + str(move))
+				
+				if (chessboard_dictionary[final_position] != ""):			
+					redisClient.set(FINAL_PIECE_LOCATION_KEY_X,str(0.37))
+					redisClient.set(FINAL_PIECE_LOCATION_KEY_Y,str(0.3))
+					redisClient.set(INITIAL_PIECE_LOCATION_KEY_X,str(FINAL_POSITION[0]))
+					redisClient.set(INITIAL_PIECE_LOCATION_KEY_Y,str(FINAL_POSITION[1]))
+					redisClient.set(ROBOT_RUNNING_KEY,'2')
+					ROBOT_RUNNING = '2'
+					while (ROBOT_RUNNING == '2'):
+						ROBOT_RUNNING = redisClient.get(ROBOT_RUNNING_KEY).decode('utf-8')
+				
+				chessboard_dictionary[initial_position] = ""
+				chessboard_dictionary[final_position] = CHESS_PIECE
+				
+				redisClient.set(PIECE_NAME_KEY, CHESS_PIECE)
+				redisClient.set(FINAL_PIECE_LOCATION_KEY_X,str(FINAL_POSITION[0]))
+				redisClient.set(FINAL_PIECE_LOCATION_KEY_Y,str(FINAL_POSITION[1]))
+				redisClient.set(INITIAL_PIECE_LOCATION_KEY_X,str(INITIAL_POSITION[0]))
+				redisClient.set(INITIAL_PIECE_LOCATION_KEY_Y,str(INITIAL_POSITION[1]))
+				redisClient.set(ROBOT_RUNNING_KEY,'1')
+										
+				ROBOT_TURN = True
+				PLAYER_TURN = False
 			
 			
 			

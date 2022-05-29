@@ -145,6 +145,7 @@ int main(int argc, char* argv[]) {
 	double time;
 	double lastWPTime;
 	double nextWPTime;
+	int CHANGE_STATE = 1;
 
 	while (runloop) {
 	
@@ -161,7 +162,6 @@ int main(int argc, char* argv[]) {
 			
 			Vector3d final_piece_pos;
 			
-
 			final_piece_pos[0] = stod(redis_client.get(FINAL_PIECE_LOCATION_KEY_X));
 			final_piece_pos[1] = stod(redis_client.get(FINAL_PIECE_LOCATION_KEY_Y));
 			final_piece_pos[2] = 0;
@@ -202,7 +202,12 @@ int main(int argc, char* argv[]) {
 			robot->angularVelocity(w,ee_link_name, pos_in_ee_link);
 
 			VectorXd q_desired(dof);
+			VectorXd q_desired_0(dof);
 			q_desired <<0,-0.785398,-0,-2.18166,-0,1.39626,0.1,0,0;
+						
+			if (CHANGE_STATE == 1) {
+				q_desired_0 = robot->_q;
+			}
 
 			if (ROBOT_RUNNING == "1" || ROBOT_RUNNING == "2") {
 
@@ -314,7 +319,6 @@ int main(int argc, char* argv[]) {
 					waypoint = final_piece_pos;
 					waypoint[2] += grab_height;
 					fingerPos = open;
-
 				}
 				else if(controller_mode2 == LIFTING){
 					waypoint = final_piece_pos;
@@ -414,6 +418,7 @@ int main(int argc, char* argv[]) {
 			else if (error < 0.01 && (controller_mode == RETURNING || controller_mode2 == RETURNING_2)){
 				controller_mode = 0;
 				controller_mode2 = 0;
+				CHANGE_STATE = 1;
 				redis_client.set(ROBOT_RUNNING_KEY, "0");
 			}
 			
@@ -436,12 +441,19 @@ int main(int argc, char* argv[]) {
 			}
 		}
 		else {
+		CHANGE_STATE = 0;
 		Eigen::VectorXd g(dof); // Empty Gravity Vector
 		robot->gravityVector(g);
-		command_torques = g;
+		double kpj = 50;
+		double kvj = 10;
 		
+		
+		command_torques = g + robot->_M*(-kvj * (robot->_dq));
+				
 		
 		if(controller_counter % 200 == 0){
+				cout << q_desired_0;
+				cout << robot->_q;
 				cout << "state: "<< controller_mode << endl;
 				cout << "state: "<< controller_mode2 << endl;
 				cout << "robot running "<< ROBOT_RUNNING << endl << endl;

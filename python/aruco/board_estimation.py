@@ -20,9 +20,36 @@ scan_num = 0
 scan_redundancy = 10
 
 board = chess.Board()
+current_board_string = ""
 
 pieceNames = ["BISHOP", "KING", "KNIGHT", "PAWN", "QUEEN", "ROOK"]
 pieceSymbols = ["B", "K", "N", "P", "Q", "R"]
+#nums = {1:"a", 2:"b", 3:"c", 4:"d", 5:"e", 6:"f", 7:"g", 8:"h"}
+
+letters = ["a", "b", "c", "d", "e", "f", "g", "h"]
+numbers = ["8", "7", "6", "5", "4", "3", "2", "1"]
+
+def fen_to_board(fen):
+    board = []
+    for row in fen.split('/'):
+        brow = []
+        for c in row:
+            if c == ' ':
+                break
+            elif c in '12345678':
+                brow.extend( ['--'] * int(c) )
+            elif c == 'p':
+                brow.append( 'bp' )
+            elif c == 'P':
+                brow.append( 'wp' )
+            elif c > 'Z':
+                brow.append( 'b'+c.upper() )
+            else:
+                brow.append( 'w'+c )
+
+        board.append( brow )
+    return board
+
 
 def scan_board(frame, aruco_dict_type, matrix_coefficients, distortion_coefficients):
     '''
@@ -96,17 +123,13 @@ def scan_board(frame, aruco_dict_type, matrix_coefficients, distortion_coefficie
                     board.set_piece_at(square,piece)
             
             scan_num += 1
-            if(scan_num % 20 == 0):
-                print(board)
-                print("")
-                #chess.svg.board(board)
 
         #else:
             #print("Full Board Not Found")
 
 
 
-    return frame
+    return frame, board
 
 
 if __name__ == '__main__':
@@ -128,6 +151,7 @@ if __name__ == '__main__':
     calibration_matrix_path = args["K_Matrix"]
     distortion_coefficients_path = args["D_Coeff"]
     '''
+    redisClient = redis.Redis()
     aruco_dict_type = ARUCO_DICT["DICT_4X4_100"]
     calibration_matrix_path = "calibration_matrix.npy"
     distortion_coefficients_path = "distortion_coefficients.npy"
@@ -136,23 +160,52 @@ if __name__ == '__main__':
     d = np.load(distortion_coefficients_path)
 
     video = cv2.VideoCapture(0)
-    time.sleep(2.0)
+    time.sleep(2)
+    
+    initial_board = ""
+    final_board = ""
+    
+    board_width = 8
+    board_height = 8
 
     while True:
         ret, frame = video.read()
-
-        if not ret:
-            print("Cannot find video stream")
-            print("Try plugging in a webcam")
-            break
-        
-        output = scan_board(frame, aruco_dict_type, k, d)
+                       
+        output, board = scan_board(frame, aruco_dict_type, k, d)
 
         cv2.imshow('Estimated Pose', output)
-
+        
+        ready_initial = redisClient.get('READY_SCAN_BOARD_INITIAL').decode('utf-8')
+        ready_final = redisClient.get('READY_SCAN_BOARD_FINAL').decode('utf-8')
+          
+        if (ready_initial == "1"):
+        	initial_board = fen_to_board(board.fen())
+        	print(initial_board)
+        	redisClient.set('READY_SCAN_BOARD_INITIAL', 0)
+        	ready_initial = "0"
+        elif (ready_final == "1"):
+        	final_board = fen_to_board(board.fen())
+        	
+        	initial_move = ""
+        	final_move = ""
+        	
+        	for i in range(board_width):
+        		for j in range(board_height):
+        			if initial_board[i][j] != final_board[i][j]:
+        				if (initial_board[i][j] != '--'):
+        					initial_move = str(letters[j]) + str(numbers[i])
+        				else:
+        					final_move = str(letters[j]) + str(numbers[i])
+        	move = initial_move + final_move
+        	
+        	print(move)
+        	redisClient.set('PLAYER_MOVE_KEY',move)
+        	redisClient.set('READY_SCAN_BOARD_FINAL', 0)
+        	ready_final = "0"
+        	
         key = cv2.waitKey(1) & 0xFF
+        
         if key == ord('q'):
-            break
-
+        	break
     video.release()
     cv2.destroyAllWindows()
