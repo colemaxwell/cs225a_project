@@ -180,12 +180,12 @@ if __name__ == '__main__':
           
         if (ready_initial == "1"):
         	initial_board = fen_to_board(board.fen())
-        	print(initial_board)
+        	print(board)
         	redisClient.set('READY_SCAN_BOARD_INITIAL', 0)
         	ready_initial = "0"
         elif (ready_final == "1"):
         	final_board = fen_to_board(board.fen())
-        	
+        	print(board)
         	initial_move = ""
         	final_move = ""
         	
