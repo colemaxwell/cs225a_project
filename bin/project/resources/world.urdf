@@ -4,7 +4,7 @@
 
 	<robot name="PANDA1">
 		<model dir="./resources" path="panda_arm_hand.urdf" name="panda_arm_hand" />
-		<origin xyz = "0.0 0 -0.05" rpy="0 0 -1.57"/>
+		<origin xyz = "0.0 0 -0.05" rpy="0 0 0"/>
 	</robot>
 	
 	<robot name="PANDA2">
@@ -13,7 +13,7 @@
 	</robot>
 
 	<static_object name="Board">
-		<origin xyz="0.4 0.0 -0.001" rpy="0 0 1.5708" />
+		<origin xyz="0.4 0.0 -0.001" rpy="0 0 0" />
 		<inertial>
         	<origin xyz="0 0 0" rpy="0 0 0" />
         	<mass value="0" />
