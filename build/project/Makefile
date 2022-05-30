@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/colemaxwell/sai2/core/cs225a_project
+CMAKE_SOURCE_DIR = /home/connor/sai2/core/cs225a_project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/colemaxwell/sai2/core/cs225a_project/build
+CMAKE_BINARY_DIR = /home/connor/sai2/core/cs225a_project/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/colemaxwell/sai2/core/cs225a_project/build/CMakeFiles /home/colemaxwell/sai2/core/cs225a_project/build/project/CMakeFiles/progress.marks
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f CMakeFiles/Makefile2 project/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/colemaxwell/sai2/core/cs225a_project/build/CMakeFiles 0
+	cd /home/connor/sai2/core/cs225a_project/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/connor/sai2/core/cs225a_project/build/CMakeFiles /home/connor/sai2/core/cs225a_project/build/project/CMakeFiles/progress.marks
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f CMakeFiles/Makefile2 project/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/connor/sai2/core/cs225a_project/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f CMakeFiles/Makefile2 project/clean
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f CMakeFiles/Makefile2 project/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,22 +97,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f CMakeFiles/Makefile2 project/preinstall
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f CMakeFiles/Makefile2 project/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f CMakeFiles/Makefile2 project/preinstall
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f CMakeFiles/Makefile2 project/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/connor/sai2/core/cs225a_project/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 project/CMakeFiles/simviz.dir/rule:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f CMakeFiles/Makefile2 project/CMakeFiles/simviz.dir/rule
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f CMakeFiles/Makefile2 project/CMakeFiles/simviz.dir/rule
 .PHONY : project/CMakeFiles/simviz.dir/rule
 
 # Convenience name for target.
@@ -122,12 +122,12 @@ simviz: project/CMakeFiles/simviz.dir/rule
 
 # fast build rule for target.
 simviz/fast:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/simviz.dir/build.make project/CMakeFiles/simviz.dir/build
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/simviz.dir/build.make project/CMakeFiles/simviz.dir/build
 .PHONY : simviz/fast
 
 # Convenience name for target.
 project/CMakeFiles/controller.dir/rule:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f CMakeFiles/Makefile2 project/CMakeFiles/controller.dir/rule
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f CMakeFiles/Makefile2 project/CMakeFiles/controller.dir/rule
 .PHONY : project/CMakeFiles/controller.dir/rule
 
 # Convenience name for target.
@@ -137,7 +137,7 @@ controller: project/CMakeFiles/controller.dir/rule
 
 # fast build rule for target.
 controller/fast:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/controller.dir/build.make project/CMakeFiles/controller.dir/build
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/controller.dir/build.make project/CMakeFiles/controller.dir/build
 .PHONY : controller/fast
 
 controller.o: controller.cpp.o
@@ -146,7 +146,7 @@ controller.o: controller.cpp.o
 
 # target to build an object file
 controller.cpp.o:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/controller.dir/build.make project/CMakeFiles/controller.dir/controller.cpp.o
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/controller.dir/build.make project/CMakeFiles/controller.dir/controller.cpp.o
 .PHONY : controller.cpp.o
 
 controller.i: controller.cpp.i
@@ -155,7 +155,7 @@ controller.i: controller.cpp.i
 
 # target to preprocess a source file
 controller.cpp.i:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/controller.dir/build.make project/CMakeFiles/controller.dir/controller.cpp.i
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/controller.dir/build.make project/CMakeFiles/controller.dir/controller.cpp.i
 .PHONY : controller.cpp.i
 
 controller.s: controller.cpp.s
@@ -164,7 +164,7 @@ controller.s: controller.cpp.s
 
 # target to generate assembly for a file
 controller.cpp.s:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/controller.dir/build.make project/CMakeFiles/controller.dir/controller.cpp.s
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/controller.dir/build.make project/CMakeFiles/controller.dir/controller.cpp.s
 .PHONY : controller.cpp.s
 
 simviz.o: simviz.cpp.o
@@ -173,7 +173,7 @@ simviz.o: simviz.cpp.o
 
 # target to build an object file
 simviz.cpp.o:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/simviz.dir/build.make project/CMakeFiles/simviz.dir/simviz.cpp.o
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/simviz.dir/build.make project/CMakeFiles/simviz.dir/simviz.cpp.o
 .PHONY : simviz.cpp.o
 
 simviz.i: simviz.cpp.i
@@ -182,7 +182,7 @@ simviz.i: simviz.cpp.i
 
 # target to preprocess a source file
 simviz.cpp.i:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/simviz.dir/build.make project/CMakeFiles/simviz.dir/simviz.cpp.i
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/simviz.dir/build.make project/CMakeFiles/simviz.dir/simviz.cpp.i
 .PHONY : simviz.cpp.i
 
 simviz.s: simviz.cpp.s
@@ -191,7 +191,7 @@ simviz.s: simviz.cpp.s
 
 # target to generate assembly for a file
 simviz.cpp.s:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/simviz.dir/build.make project/CMakeFiles/simviz.dir/simviz.cpp.s
+	cd /home/connor/sai2/core/cs225a_project/build && $(MAKE) -f project/CMakeFiles/simviz.dir/build.make project/CMakeFiles/simviz.dir/simviz.cpp.s
 .PHONY : simviz.cpp.s
 
 # Help Target
@@ -221,6 +221,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/colemaxwell/sai2/core/cs225a_project/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/connor/sai2/core/cs225a_project/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -94,8 +94,6 @@ int main() {
 
 	// load simulation world
 	auto sim = new Simulation::Sai2Simulation(world_file, false);
-	sim->setCollisionRestitution(0);
-	sim->setCoeffFrictionStatic(0.6);
 
 	// read joint positions, velocities, update model
 	sim->getJointPositions(robot_name, robot->_q);
@@ -106,8 +104,8 @@ int main() {
     sim->setCollisionRestitution(0.0);
 
     // set co-efficient of friction
-    sim->setCoeffFrictionStatic(0.6);
-    sim->setCoeffFrictionDynamic(0.4);
+    sim->setCoeffFrictionStatic(0.8);
+    sim->setCoeffFrictionDynamic(0.8);
 
 
 	// fill in object information 

@@ -9,25 +9,25 @@
 #include <string>
 
 // state machine
-#define MOVING_TO_PIECE	0
+#define MOVING_TO_PIECE		0
 #define PICKING_DOWN		1
-#define PICKING		2
-#define PICKING_UP		3
+#define PICKING				2
+#define PICKING_UP			3
 #define MOVING_PIECE		4
 #define PLACING_DOWN		5
-#define PLACING		6
-#define PLACING_UP		7
-#define RETURNING		8
+#define PLACING				6
+#define PLACING_UP			7
+#define RETURNING			8
 
 
-#define MOVING_TO_PIECE	0
+#define MOVING_TO_PIECE		0
 #define PICKING_DOWN		1
-#define PICKING		2
-#define PICKING_UP		3
+#define PICKING				2
+#define PICKING_UP			3
 #define MOVING_PIECE		4
-#define DROPPING		5
-#define LIFTING		7
-#define RETURNING_2		8
+#define DROPPING			5
+#define LIFTING				7
+#define RETURNING_2			8
 
 #define PI 3.14159265
 
@@ -66,7 +66,7 @@ const std::string ROBOT_RUNNING_KEY = "sai2::cs225a::state::dynamics";
 
 unsigned long long controller_counter = 0;
 
-double grab_height = 0.04;
+double grab_height = 0.055;
 double over_height = 0.2;
 const Vector3d home = Vector3d(0.25, 0, over_height);
 Matrix3d point_down;
@@ -102,7 +102,7 @@ int main(int argc, char* argv[]) {
 	// prepare controller
 	int dof = robot->dof();
 	const string ee_link_name = "link7";
-	const Vector3d pos_in_ee_link = Vector3d(0, 0, 0.21);
+	const Vector3d pos_in_ee_link = Vector3d(0, 0, 0.245);
 	VectorXd command_torques = VectorXd::Zero(dof);
 
 	// model quantities for operational space control
@@ -220,20 +220,21 @@ int main(int argc, char* argv[]) {
 
 			double kp = 500;
 			double kv = 50;
-			double kpRot = 500;
-			double kvRot = 50;
+			double kpRot = 1000;
+			double kvRot = 70;
 
-			double kpj = 800;
+			double kpj = 500;
 			double kvj = 50;
 
-			double open = 0.020;
+			double open = 0.016;
 			double closed = 0;
 
-			double fingerPos;
+			double fingerPos = closed;
 
 			Vector3d target_piece_pos_z0 = Vector3d(initial_piece_pos[0], initial_piece_pos[1], 0);
 
 			R_d = point_down;
+
 			
 			if (ROBOT_RUNNING == "1") {
 
@@ -424,7 +425,7 @@ int main(int argc, char* argv[]) {
 			
 
 			if(controller_counter % 200 == 0){
-				cout << ROBOT_RUNNING_KEY << endl;
+				cout << ROBOT_RUNNING_KEY << endl << endl;
 				cout << "state: "<< controller_mode << endl;
 				cout << "state: "<< controller_mode2 << endl;
 				cout << "failCount: "<< failCount << endl;
@@ -437,7 +438,7 @@ int main(int argc, char* argv[]) {
 				cout << "move error: "<< move_error << endl;
 				cout << "finger error: "<< finger_error << endl;
 				cout << "finger move error: "<< finger_mask.cwiseProduct(robot->_dq).norm() << endl << endl;
-				cout << "robot running "<< ROBOT_RUNNING << endl << endl;
+				cout << "robot running: "<< ROBOT_RUNNING << endl << endl;
 			}
 		}
 		else {

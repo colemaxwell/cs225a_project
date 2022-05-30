@@ -1,4 +1,4 @@
-# Install script for directory: /home/colemaxwell/sai2/core/cs225a_project/project
+# Install script for directory: /home/connor/sai2/core/cs225a_project/project
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
