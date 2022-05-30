@@ -109,9 +109,6 @@ int main() {
 	robots_sim[0]->updateKinematics();
 	robots_sim[1]->updateKinematics();
 
-	// load simulation world
-	auto sim = new Simulation::Sai2Simulation(world_file, false);
-
 	// read joint positions, velocities, update model
 	for(int i=0; i<n_robots; i++) {
 	sim->getJointPositions(robot_names[i], robots_sim[i]->_q);
