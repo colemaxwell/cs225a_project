@@ -189,10 +189,10 @@ int main(int argc, char* argv[]) {
 	vector<Affine3d> robot_pose_in_world;
 	Affine3d pose = Affine3d::Identity();
 	pose.translation() = Vector3d(0,0,-0.05);
-	pose.linear() = AngleAxisd(-1.57079,Vector3d::UnitZ()).toRotationMatrix();
+	pose.linear() = AngleAxisd(0,Vector3d::UnitZ()).toRotationMatrix();
 	robot_pose_in_world.push_back(pose);
 	pose.translation() = Vector3d(0.85,0,-0.05);
-	pose.linear() = AngleAxisd(1.57079,Vector3d::UnitZ()).toRotationMatrix();
+	pose.linear() = AngleAxisd(0,Vector3d::UnitZ()).toRotationMatrix();
 	robot_pose_in_world.push_back(pose);
 
 	while (runloop) {
