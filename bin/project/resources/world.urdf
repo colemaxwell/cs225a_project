@@ -2,8 +2,14 @@
 
 <world name="project_world" gravity="0.0 0.0 -9.81">
 
-	<robot name="PANDA">
+	<robot name="PANDA1">
 		<model dir="./resources" path="panda_arm_hand.urdf" name="panda_arm_hand" />
+		<origin xyz = "0.0 0 -0.05" rpy="0 0 -1.57"/>
+	</robot>
+	
+	<robot name="PANDA2">
+		<model dir="./resources" path="panda_arm_hand.urdf" name="panda_arm_hand" />
+		<origin xyz = "0.85 0 -0.05" rpy="0 0 1.57"/>
 	</robot>
 
 	<static_object name="Board">
