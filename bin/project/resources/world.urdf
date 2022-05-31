@@ -21,7 +21,7 @@
       	</inertial>
 
 	    <visual>
-	        <origin xyz="0 0 0" rpy="0 0 0" />
+	        <origin xyz="0 0 0" rpy="0 0 1.570795" />
 			<geometry>
 	            <mesh filename="../../model/chess/meshes/visual/Board.obj" scale="1 1 1"/>
 	        </geometry>

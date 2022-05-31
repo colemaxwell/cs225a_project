@@ -65,10 +65,12 @@ def scan_board(frame, aruco_dict_type, matrix_coefficients, distortion_coefficie
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     cv2.aruco_dict = cv2.aruco.Dictionary_get(aruco_dict_type)
     parameters = cv2.aruco.DetectorParameters_create()
+    parameters.adaptiveThreshWinSizeMax = 10
+    parameters.adaptiveThreshWinSizeStep = 1
+    parameters.maxMarkerPerimeterRate = 0.75
 
     if(scan_num % 20 == 0):
         board.clear()
-
 
     corners, ids, rejected_img_points = cv2.aruco.detectMarkers(gray, cv2.aruco_dict,parameters=parameters,
         cameraMatrix=matrix_coefficients,
@@ -117,6 +119,8 @@ def scan_board(frame, aruco_dict_type, matrix_coefficients, distortion_coefficie
                     [[xfloat,yfloat]] = t(center)
                     x = math.floor(xfloat)
                     y = math.floor(yfloat)
+                    if (x < 0 or y < 0 or x > 7 or y > 7):
+                        break;
                     square = chess.square(x,y)
                     pieceSymbol = pieceSymbols[idNum]
                     piece = chess.Piece.from_symbol(pieceSymbol)
