@@ -73,8 +73,8 @@ unsigned long long controller_counter = 0;
 
 double grab_height = 0.055;
 double over_height = 0.2;
-const Vector3d home_white = Vector3d(0.0, 0.4, over_height);
-const Vector3d home_black = Vector3d(0.85, -0.4, over_height);
+const Vector3d home_white = Vector3d(0.75, 0, 0.45);
+const Vector3d home_black = Vector3d(0.10, 0, 0.45);
 Matrix3d point_down;
 Vector2d target_location_board = Vector2d(3, 4);
 std::string target_piece = "BPawn4";
@@ -177,7 +177,7 @@ int main(int argc, char* argv[]) {
 	finger_mask <<  0, 0, 0, 0, 0, 0, 0, 1, 1;	
 
 	int failCount = 0;
-	int failMax = 20;
+	int failMax = 200;
 
 	Vector3d piece_lock;
 	double time;
@@ -188,10 +188,10 @@ int main(int argc, char* argv[]) {
 
 	vector<Affine3d> robot_pose_in_world;
 	Affine3d pose = Affine3d::Identity();
-	pose.translation() = Vector3d(0,0,-0.05);
-	pose.linear() = AngleAxisd(0,Vector3d::UnitZ()).toRotationMatrix();
-	robot_pose_in_world.push_back(pose);
 	pose.translation() = Vector3d(0.85,0,-0.05);
+	pose.linear() = AngleAxisd(PI,Vector3d::UnitZ()).toRotationMatrix();
+	robot_pose_in_world.push_back(pose);
+	pose.translation() = Vector3d(0,0,-0.05);
 	pose.linear() = AngleAxisd(0,Vector3d::UnitZ()).toRotationMatrix();
 	robot_pose_in_world.push_back(pose);
 
@@ -563,8 +563,8 @@ int main(int argc, char* argv[]) {
 			}
 			}
 
-			double error = move_error + finger_error * 10;
-			if (error < 0.01 && ((controller_mode != RETURNING && ROBOT_RUNNING == "1") || (controller_mode2 != RETURNING_2 && ROBOT_RUNNING == "2"))) {
+			double error = move_error + finger_error * 100;
+			if (error < 0.007 && ((controller_mode != RETURNING && ROBOT_RUNNING == "1") || (controller_mode2 != RETURNING_2 && ROBOT_RUNNING == "2"))) {
 			
 				if (ROBOT_RUNNING == "1") {
 				controller_mode += 1;
@@ -577,7 +577,7 @@ int main(int argc, char* argv[]) {
 				//lastWPTime = time;
 				failCount = 0;
 			}
-			else if (error < 0.01 && (controller_mode == RETURNING || controller_mode2 == RETURNING_2)){
+			else if (error < 0.007 && (controller_mode == RETURNING || controller_mode2 == RETURNING_2)){
 				controller_mode = 0;
 				controller_mode2 = 0;
 				CHANGE_STATE = 1;
@@ -619,8 +619,8 @@ int main(int argc, char* argv[]) {
 		command_torques_2 = g_2 + robots_sim[1]->_M*(-kvj * (robots_sim[1]->_dq));
 		
 		if(controller_counter % 200 == 0){
-				cout << q_desired_0;
-				cout << robots_sim[0]->_q;
+				cout << "desired joints: "<< endl << q_desired_0 << endl<< endl;
+				cout << "joints: " << endl << robots_sim[0]->_q << endl<< endl;
 				cout << "state: "<< controller_mode << endl;
 				cout << "state: "<< controller_mode2 << endl;
 				cout << "robot running "<< ROBOT_RUNNING << endl << endl;

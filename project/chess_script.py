@@ -108,7 +108,6 @@ if __name__ == "__main__":
 				
 			while (READY_SCAN_BOARD_INITIAL != '1'):
 				READY_SCAN_BOARD_INITIAL = input("Enter 1 to scan the board (pre_move): ")
-				print(type(READY_SCAN_BOARD_INITIAL))
 				
 			redisClient.set(READY_SCAN_BOARD_INITIAL_KEY, READY_SCAN_BOARD_INITIAL)
 					
@@ -131,9 +130,9 @@ if __name__ == "__main__":
 			
 			print("Your move is " + move + ".")
 			
-			correct_move = input("Input 1 if the displayed move is correct.")
+			correct_move = input("Is the displayed move correct? \ny: yes \nn: no \ns: play for me\n> ")
 			
-			if (correct_move != "1"):
+			if (correct_move == "s"):
 				move = stockfish.get_best_move();
 				stockfish.make_moves_from_current_position([move])
 				initial_position = move[0:2]
@@ -166,7 +165,7 @@ if __name__ == "__main__":
 										
 				ROBOT_TURN = True
 				PLAYER_TURN = False
-			else:
+			elif(correct_move == "y"):
 				stockfish.make_moves_from_current_position([move])
 				initial_position = move[0:2]
 				final_position = move[2:]
